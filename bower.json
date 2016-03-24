@@ -23,6 +23,7 @@
     "angularfire": "^1.1.4",
     "firebase": "^2.4.1",
     "lodash": "^4.6.1",
-    "angular-filter": "^0.5.8"
+    "angular-filter": "^0.5.8",
+    "angular-materialize": "^0.1.3"
   }
 }
