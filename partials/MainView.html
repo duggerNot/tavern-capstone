@@ -7,9 +7,9 @@
 
 
 <!-- Race Select -->
-<!-- TODO: ADD SUPPORT FOR SUBRACES -->
+<!-- TO-DO: ADD SUPPORT FOR SUBRACES -->
 		<div class="input-field col s3">
-	    <select>
+	    <select id="raceSelect">
 	      <option value="" disabled selected>Choose a Race</option>
 	      <option value="Human">Human</option>
 				<option value="Dwarf">Dwarf</option>
@@ -25,8 +25,9 @@
 
 
 	 <!-- Class Select -->
+	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? -->
 	 <div class="input-field col s3">
-	    <select>
+	    <select id="classSelect">
 	      <option value="" disabled selected>Choose a Class</option>
 	      <option value="barbarian">Barbarian</option>
 				<option value="bard">Bard</option>
@@ -42,4 +43,24 @@
 				<option value="wizard">Wizard</option>
 	    </select>
 	  </div>
+
+
+	  <!-- Alignment -->
+	<div class="input-field col s3">
+	    <select id="alignmentSelect">
+	      <option value="" disabled selected>Pick your Alignment</option>
+	      <option value="lawGood">Lawful Good</option>
+				<option value="lawNeut">Lawful Neutral</option>
+				<option value="lawEvil">Lawful Evil</option>
+				<option value="neutGood">Neutral Good</option>
+				<option value="trueNeut">True Neutral</option>
+				<option value="neutEvil">Neutral Evil</option>
+				<option value="chaoGood">Chaotic Good</option>
+				<option value="chaoNeut">Chaotic Neutral</option>
+				<option value="chaoEvil">Chaotic Evil</option>
+	    </select>
+	  </div>
+
+
+
 	</div>

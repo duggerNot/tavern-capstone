@@ -1,3 +1,7 @@
 nav#topBar {
 	background-color: #455a64;
 }
+
+a#logoutBtn {
+	padding-right: 15px;
+}

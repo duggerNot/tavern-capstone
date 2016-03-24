@@ -9,10 +9,10 @@ let TavernApp = angular.module("tavern-app", ["ngRoute", "firebase"])
  */
 let isAuth = (authFactory) => new Promise((resolve, reject) => {
   if (authFactory.isAuthenticated()) {
-    console.log("User is authenticated, resolve route promise");
+    console.log("User is authenticated");
     resolve();
   } else {
-    console.log("User is not authenticated, reject route promise");
+    console.log("User is not authenticated");
     reject();
   }
 });
@@ -34,8 +34,13 @@ TavernApp.config(["$routeProvider",
         controller: "MainAppCtrl",
         resolve: { isAuth }
       }).
+      when("/CharList", {
+      	templateUrl: "partials/ListView.html",
+      	controller: "ListViewCtrl",
+      	resolve: { isAuth }
+      }).
       otherwise({
-        redirectTo: "/login"
+        redirectTo: "/main"
       });
   }]);
 
