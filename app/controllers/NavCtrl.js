@@ -14,7 +14,10 @@ TavernApp.controller("NavCtrl",[
     	ref.unauth();
     }
 
-
+		// // mobile view
+  //   $(".button-collapse").sideNav({
+		// 	closeOnClick: true
+		// });
 
 
 
