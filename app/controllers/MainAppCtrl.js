@@ -9,6 +9,11 @@ TavernApp.controller("MainAppCtrl",
 
   function($scope, $http, authFactory, firebaseAuthURL) {
 
+		$scope.dwarfSubRaces = ["Hill Dwarf", "Mountain Dwarf"];
+		$scope.elfSubRaces = ["High Elf", "Wood Elf", "Dark Elf"];
+		$scope.halflingSubRaces = ["Lightfoot", "Stout"];
+		$scope.humanSubRaces = ["Calishite", "Chondathan", "Damaran", "Illuskan", "Mulan", "Rashemi", "Shou", "Tethyrian", "Turami"];
+		$scope.gnomeSubRaces = ["Forest Gnome", "Rock Gnome"];
   	$scope.CharObject = {};
   	$scope.CharObject.profBonus = 2;
 
@@ -102,13 +107,6 @@ TavernApp.controller("MainAppCtrl",
 			}
 		}
 
-		$scope.dwarfSubRaces = ["Hill Dwarf", "Mountain Dwarf"];
-		$scope.elfSubRaces = ["High Elf", "Wood Elf", "Dark Elf"];
-		$scope.halflingSubRaces = ["Lightfoot", "Stout"];
-		$scope.humanSubRaces = ["Calishite", "Chondathan", "Damaran", "Illuskan", "Mulan", "Rashemi", "Shou", "Tethyrian", "Turami"];
-		$scope.gnomeSubRaces = ["Forest Gnome", "Rock Gnome"];
-
-
 		$scope.subRaceFilter = function() {
 			switch ($scope.selectedRace) {
 				case "Dwarf":
@@ -173,6 +171,46 @@ TavernApp.controller("MainAppCtrl",
 			}
 
 		}
+		$scope.savingThrows = (charObj) => {
+			switch (charObj.class) {
+				case "Barbarian":
+					return "Strength & Constitution"
+					break;
+				case "Bard":
+					return "Dexterity & Charisma"
+					break;
+				case "Cleric":
+					return "Wisdom & Charisma"
+					break;
+				case "Druid":
+					return "Intelligence & Wisdom"
+					break;
+				case "Fighter":
+					return "Strength & Constitution"
+					break;
+				case "Monk":
+					return "Strength & Dexterity"
+					break;
+				case "Paladin":
+					return "Wisdom & Charisma"
+					break;
+				case "Ranger":
+					return "Strength & Dexterity"
+					break;
+				case "Rogue":
+					return "Dexterity & Intelligence"
+					break;
+				case "Sorcerer":
+					return "Constitution & Charisma"
+					break;
+				case "Warlock":
+					return "Wisdom & Charisma"
+					break;
+				case "Wizard":
+					return "Intelligence & Wisdom"
+					break;
+			}
+		}
 		
 
 		$scope.saveChar = () => {
@@ -182,8 +220,6 @@ TavernApp.controller("MainAppCtrl",
 			$scope.CharObject.class = $scope.class;
 			$scope.CharObject.alignment = $scope.alignment;
 
-
-
 			$scope.CharObject.StrMod = $scope.determineMod($scope.CharObject.Strength);
 			$scope.CharObject.DexMod = $scope.determineMod($scope.CharObject.Dexterity);
 			$scope.CharObject.ConMod = $scope.determineMod($scope.CharObject.Constitution);
@@ -192,6 +228,7 @@ TavernApp.controller("MainAppCtrl",
 			$scope.CharObject.ChaMod = $scope.determineMod($scope.CharObject.Charisma);
 
 			$scope.CharObject.HitPoints = $scope.getHP($scope.CharObject);
+			$scope.CharObject.SavingThrows = $scope.savingThrows($scope.CharObject);
 			console.log("object", $scope.CharObject);
 		}
 
