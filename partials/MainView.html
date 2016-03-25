@@ -7,7 +7,6 @@
 
 
 <!-- Race Select -->
-<!-- TO-DO: ADD SUPPORT FOR SUBRACES -->
 		<div class="input-field col s3">
 	    <select id="raceSelect" ng-model="selectedRace" ng-change="subRaceFilter()">
 	      <option value="" disabled selected>Choose a Race</option>
@@ -22,10 +21,15 @@
 				<option value="Tiefling">Tiefling</option>
 	    </select>
 	  </div>
+	  <div class="input-field col s3">
+			<select id="subRaceSelect" placeholder="Choose a Sub-Race" ng-model="subRace"
+				ng-options="value for value in subRaceFilter()">
+			</select>
+		</div>
 
 
 	 <!-- Class Select -->
-	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? -->
+	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? NOT MVP!! -->
 	 <div class="input-field col s3">
 	    <select id="classSelect"ng-model="class">
 	      <option value="" disabled selected>Choose a Class</option>
@@ -62,25 +66,15 @@
 	  </div>
 	</div>
 
-<div class="row">
-
-	<div class="input-field col s3">
-		<select id="subRaceSelect" placeholder="Choose a Sub-Race" ng-model="subRace"
-			ng-options="value for value in subRaceFilter()">
-		</select>
-</div>
 
 
-	
-
-
-	
-
-</div>
-
-
-<div class="statsBox">
-	<span>Strength: {{ strengthRoll }} <button ng-value="strengthRoll" ng-click="statRoll()">roll</button></span>
+<div class="statsBox" >
+	<div ng-model="object[Strength]">Strength: {{ object.Strength }} <button ng-click="statRoll('Strength')">roll</button></div>
+	<div ng-model="object[Dexterity]">Dexterity: {{ object.Dexterity }} <button ng-click="statRoll('Dexterity')">roll</button></div>
+	<div ng-model="object[Constitution]">Constitution: {{ object.Constitution }} <button ng-click="statRoll('Constitution')">roll</button></div>
+	<div ng-model="object[Intelligence]">Intelligence: {{ object.Intelligence }} <button ng-click="statRoll('Intelligence')">roll</button></div>
+	<div ng-model="object[Wisdom]">Wisdom: {{ object.Wisdom }} <button ng-click="statRoll('Wisdom')">roll</button></div>
+	<div ng-model="object[Charisma]">Charisma: {{ object.Charisma }} <button ng-click="statRoll('Charisma')">roll</button></div>
 </div>
 
 
