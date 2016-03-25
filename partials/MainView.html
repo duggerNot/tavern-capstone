@@ -79,7 +79,9 @@
 	<div><button ng-click="rollAll()">Roll</button></div>
 </div>
 <div ng-if="(CharObject.Constitution != null && CharObject.class != null)">Hit Points: {{ CharObject.HitPoints }}</div>
-<div ng-if="(CharObject.Charisma != null)"><button ng-click="saveChar()">SAVE</button></div>
+<div ng-if="(CharObject.class != null)">Saving Throws: {{ CharObject.SavingThrows }}</div>
+<div ng-if="(CharObject.Charisma != null)"><button ng-click="saveChar()">
+SAVE</button></div>
 
 
 
