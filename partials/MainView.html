@@ -1,7 +1,7 @@
 <!-- Char Name -->
 	<div class="row">
 		<div class="input-field col s3">
-  		<input placeholder="Character Name" id="char_name" type="text">
+  		<input placeholder="Character Name" id="char_name" type="text" ng-model="charName">
   	</div>
 
 
@@ -27,7 +27,7 @@
 	 <!-- Class Select -->
 	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? -->
 	 <div class="input-field col s3">
-	    <select id="classSelect">
+	    <select id="classSelect"ng-model="class">
 	      <option value="" disabled selected>Choose a Class</option>
 	      <option value="barbarian">Barbarian</option>
 				<option value="bard">Bard</option>
@@ -47,7 +47,7 @@
 
 	  <!-- Alignment -->
 	<div class="input-field col s3">
-	    <select id="alignmentSelect">
+	    <select id="alignmentSelect" ng-model="alignment">
 	      <option value="" disabled selected>Pick your Alignment</option>
 	      <option value="lawGood">Lawful Good</option>
 				<option value="lawNeut">Lawful Neutral</option>
@@ -65,39 +65,37 @@
 <div class="row">
 
 	<div class="input-field col s3">
-		<select id="subRaceSelect">
-			<option value="" disabled selected>Sub-Race</option>
-			<optgroup label="Dwarf">
-				<option value="hillDwarf">Hill Dwarf</option>
-				<option value="mtnDwarf">Mountain Dwarf</option>
-			</optgroup>
-			<optgroup label="Elf">
-				<option value="highElf">High Elf</option>
-				<option value="woodElf">Wood Elf</option>
-				<option value="drowElf">Dark Elf</option>
-			</optgroup>
-			<optgroup label="Halfling">
-				<option value="lightHalf">Lightfoot</option>
-				<option value="stoutHalf">Stout</option>
-			</optgroup>
-			<optgroup label="Human">
-				<option value="calishite">Calishite</option>
-				<option value="chondathan">Chondathan</option>
-				<option value="damaran">Damaran</option>
-				<option value="illuskan">Illuskan</option>
-				<option value="mulan">Mulan</option>
-				<option value="rashemi">Rashemi</option>
-				<option value="shou">Shou</option>
-				<option value="tethyrian">Tethyrian</option>
-				<option value="turami">Turami</option>
-			</optgroup>
-			<optgroup label="Gnome">
-				<option value="forGnome">Forest Gnome</option>
-				<option value="rockGnome">Rock Gnome</option>
-				<option value="deepGnome">Deep Gnome</option>
-			</optgroup>
+		<select id="subRaceSelect" placeholder="Choose a Sub-Race" ng-model="subRace"
+			ng-options="value for value in subRaceFilter()">
 		</select>
-	</div>
+</div>
 
+
+	
+
+
+	
 
 </div>
+
+
+<div class="statsBox">
+	<span>Strength: {{ strengthRoll }} <button ng-value="strengthRoll" ng-click="statRoll()">roll</button></span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
