@@ -78,10 +78,7 @@
 	<div ng-model="CharObject[Charisma]">Charisma: {{ CharObject.Charisma }} <button ng-if="(CharObject.Charisma != null)" ng-click="statRoll('Charisma')">roll</button></div>
 	<div><button ng-click="rollAll()">Roll</button></div>
 </div>
-
-
-
-
+<div ng-if="(CharObject.Constitution != null && CharObject.class != null)">Hit Points: {{ CharObject.HitPoints }}</div>
 <div ng-if="(CharObject.Charisma != null)"><button ng-click="saveChar()">SAVE</button></div>
 
 

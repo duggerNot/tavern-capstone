@@ -24,7 +24,6 @@ TavernApp.factory("authFactory", (firebaseAuthURL) => {
           "password": credentials.password
         }, (error, authData) => {
           if (error) {
-            Materialize.toast('Incorrect Email or Password', 2000)
             reject(error);
           } else {
             console.log("authWithPassword method completed successfully");

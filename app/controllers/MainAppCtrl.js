@@ -130,6 +130,49 @@ TavernApp.controller("MainAppCtrl",
 					break;
 			}
 		}
+
+
+		$scope.getHP = (charObj) => {
+			switch (charObj.class) {
+				case "Barbarian":
+					return (12 + charObj.ConMod);
+					break;
+				case "Bard":
+					return (8 + charObj.ConMod);
+					break;
+				case "Cleric":
+					return (8 + charObj.ConMod);
+					break;
+				case "Druid":
+					return (8 + charObj.ConMod);
+					break;
+				case "Fighter":
+					return (10 + charObj.ConMod);
+					break;
+				case "Monk":
+					return (8 + charObj.ConMod);
+					break;
+				case "Paladin":
+					return (10 + charObj.ConMod);
+					break;
+				case "Ranger":
+					return (10 + charObj.ConMod);
+					break;
+				case "Rogue":
+					return (8 + charObj.ConMod);
+					break;
+				case "Sorcerer":
+					return (6 + charObj.ConMod);
+					break;
+				case "Warlock":
+					return (8 + charObj.ConMod);
+					break;
+				case "Wizard":
+					return (6 + charObj.ConMod);
+					break;
+			}
+
+		}
 		
 
 		$scope.saveChar = () => {
@@ -139,6 +182,8 @@ TavernApp.controller("MainAppCtrl",
 			$scope.CharObject.class = $scope.class;
 			$scope.CharObject.alignment = $scope.alignment;
 
+
+
 			$scope.CharObject.StrMod = $scope.determineMod($scope.CharObject.Strength);
 			$scope.CharObject.DexMod = $scope.determineMod($scope.CharObject.Dexterity);
 			$scope.CharObject.ConMod = $scope.determineMod($scope.CharObject.Constitution);
@@ -146,6 +191,7 @@ TavernApp.controller("MainAppCtrl",
 			$scope.CharObject.WisMod = $scope.determineMod($scope.CharObject.Wisdom);
 			$scope.CharObject.ChaMod = $scope.determineMod($scope.CharObject.Charisma);
 
+			$scope.CharObject.HitPoints = $scope.getHP($scope.CharObject);
 			console.log("object", $scope.CharObject);
 		}
 
