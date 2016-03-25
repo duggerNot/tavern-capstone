@@ -1,21 +1,10 @@
 <div class="nav-wrapper" ng-controller="NavCtrl">
-
   <a href="#" class="brand-logo center">Tavern</a>
-
-  <a href="#/logout" class="right" id="logoutBtn" ng-click="logout()">Logout</a>
-<!-- 
-  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
-
+  <a href="#/logout" class="right" id="logoutBtn" ng-if="isAuthenticated()" ng-click="logout()">Logout</a>
   <ul id="nav-mobile" class="left hide-on-med-and-down">
     <li><a href="https://vk.com/doc30076597_321983871" target="_blank">Rulebook</a></li>
     <li><a href="http://ephe.github.io/grimoire/" target="_blank">Spell-List</a></li>
-    <li><a href="#/CharList">My Characters</a></li>
-    <li><a href="#/main">Character Builder</a></li>
-  </ul>
-  <!-- <ul class="side-nav" id="mobile-demo">
-    <li><a href="https://vk.com/doc30076597_321983871" target="_blank">Rulebook</a></li>
-    <li><a href="http://ephe.github.io/grimoire/" target="_blank">Spell-List</a></li>
-    <li><a href="#/CharList">My Characters</a></li>
-    <li><a href="#/main">Character Builder</a></li> -->
+    <li ng-if="isAuthenticated()"><a href="#/CharList" >My Characters</a></li>
+    <li ng-if="isAuthenticated()"><a href="#/main" >Character Builder</a></li>
   </ul>
 </div>

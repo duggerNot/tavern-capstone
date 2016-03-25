@@ -1,5 +1,5 @@
 "use strict";
-TavernApp.controlller("ListViewCtrl", [
+TavernApp.controller("ListViewCtrl", [
 	"$scope",
   "authFactory",
   "firebaseAuthURL",
