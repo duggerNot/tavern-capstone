@@ -21,8 +21,9 @@
 				<option value="Tiefling">Tiefling</option>
 	    </select>
 	  </div>
+
 	  <div class="input-field col s3">
-			<select id="subRaceSelect" placeholder="Choose a Sub-Race" ng-model="subRace"
+			<select id="subRaceSelect"  ng-model="subRace"
 				ng-options="value for value in subRaceFilter()">
 			</select>
 		</div>
@@ -33,18 +34,18 @@
 	 <div class="input-field col s3">
 	    <select id="classSelect"ng-model="class">
 	      <option value="" disabled selected>Choose a Class</option>
-	      <option value="barbarian">Barbarian</option>
-				<option value="bard">Bard</option>
-				<option value="cleric">Cleric</option>
-				<option value="druid">Druid</option>
-				<option value="fighter">Fighter</option>
-				<option value="monk">Monk</option>
-				<option value="paladin">Paladin</option>
-				<option value="ranger">Ranger</option>
-				<option value="rogue">Rogue</option>
-				<option value="sorcerer">Sorcerer</option>
-				<option value="warlock">Warlock</option>
-				<option value="wizard">Wizard</option>
+	      <option value="Barbarian">Barbarian</option>
+				<option value="Bard">Bard</option>
+				<option value="Cleric">Cleric</option>
+				<option value="Druid">Druid</option>
+				<option value="Fighter">Fighter</option>
+				<option value="Monk">Monk</option>
+				<option value="Paladin">Paladin</option>
+				<option value="Ranger">Ranger</option>
+				<option value="Rogue">Rogue</option>
+				<option value="Sorcerer">Sorcerer</option>
+				<option value="Warlock">Warlock</option>
+				<option value="Wizard">Wizard</option>
 	    </select>
 	  </div>
 
@@ -53,15 +54,15 @@
 	<div class="input-field col s3">
 	    <select id="alignmentSelect" ng-model="alignment">
 	      <option value="" disabled selected>Pick your Alignment</option>
-	      <option value="lawGood">Lawful Good</option>
-				<option value="lawNeut">Lawful Neutral</option>
-				<option value="lawEvil">Lawful Evil</option>
-				<option value="neutGood">Neutral Good</option>
-				<option value="trueNeut">True Neutral</option>
-				<option value="neutEvil">Neutral Evil</option>
-				<option value="chaoGood">Chaotic Good</option>
-				<option value="chaoNeut">Chaotic Neutral</option>
-				<option value="chaoEvil">Chaotic Evil</option>
+	      <option value="Lawful Good">Lawful Good</option>
+				<option value="Lawful Neutral">Lawful Neutral</option>
+				<option value="Lawful Evil">Lawful Evil</option>
+				<option value="Neutral Good">Neutral Good</option>
+				<option value="True Neutral">True Neutral</option>
+				<option value="Neutral Evil">Neutral Evil</option>
+				<option value="Chaotic Good">Chaotic Good</option>
+				<option value="Chaotic Neutral">Chaotic Neutral</option>
+				<option value="Chaotic Evil">Chaotic Evil</option>
 	    </select>
 	  </div>
 	</div>
@@ -69,18 +70,19 @@
 
 
 <div class="statsBox" >
-	<div ng-model="object[Strength]">Strength: {{ object.Strength }} <button ng-click="statRoll('Strength')">roll</button></div>
-	<div ng-model="object[Dexterity]">Dexterity: {{ object.Dexterity }} <button ng-click="statRoll('Dexterity')">roll</button></div>
-	<div ng-model="object[Constitution]">Constitution: {{ object.Constitution }} <button ng-click="statRoll('Constitution')">roll</button></div>
-	<div ng-model="object[Intelligence]">Intelligence: {{ object.Intelligence }} <button ng-click="statRoll('Intelligence')">roll</button></div>
-	<div ng-model="object[Wisdom]">Wisdom: {{ object.Wisdom }} <button ng-click="statRoll('Wisdom')">roll</button></div>
-	<div ng-model="object[Charisma]">Charisma: {{ object.Charisma }} <button ng-click="statRoll('Charisma')">roll</button></div>
+	<div ng-model="CharObject[Strength]">Strength: {{ CharObject.Strength }} <button ng-if="(CharObject.Strength != null)" ng-click="statRoll('Strength')">roll</button></div>
+	<div ng-model="CharObject[Dexterity]">Dexterity: {{ CharObject.Dexterity }} <button ng-if="(CharObject.Dexterity != null)" ng-click="statRoll('Dexterity')">roll</button></div>
+	<div ng-model="CharObject[Constitution]">Constitution: {{ CharObject.Constitution }} <button ng-if="(CharObject.Constitution != null)" ng-click="statRoll('Constitution')">roll</button></div>
+	<div ng-model="CharObject[Intelligence]">Intelligence: {{ CharObject.Intelligence }} <button ng-if="(CharObject.Intelligence != null)" ng-click="statRoll('Intelligence')">roll</button></div>
+	<div ng-model="CharObject[Wisdom]">Wisdom: {{ CharObject.Wisdom }} <button ng-if="(CharObject.Wisdom != null)" ng-click="statRoll('Wisdom')">roll</button></div>
+	<div ng-model="CharObject[Charisma]">Charisma: {{ CharObject.Charisma }} <button ng-if="(CharObject.Charisma != null)" ng-click="statRoll('Charisma')">roll</button></div>
+	<div><button ng-click="rollAll()">Roll</button></div>
 </div>
 
 
 
 
-
+<div ng-if="(CharObject.Charisma != null)"><button ng-click="saveChar()">SAVE</button></div>
 
 
 
