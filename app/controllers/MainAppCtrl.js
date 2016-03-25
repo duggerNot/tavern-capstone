@@ -9,11 +9,12 @@ TavernApp.controller("MainAppCtrl",
 
   function($scope, $http, authFactory, firebaseAuthURL) {
 
-
+  	$scope.object = {};
 // this function rolls 4d6 and drops the lowest value and then adds the rest for attribute stats
-		$scope.statRoll = () => {
+		$scope.statRoll = (attr) => {
+			
 			let rollArray = [];
-
+			
 			let firstRoll = (Math.floor((Math.random()*6)+1));
 			let secondRoll = (Math.floor((Math.random()*6)+1));
 			let thirdRoll = (Math.floor((Math.random()*6)+1));
@@ -34,7 +35,9 @@ TavernApp.controller("MainAppCtrl",
 			});
 			console.log("final", finalRoll);
 
-			return finalRoll;
+			$scope.object[attr] = finalRoll;
+			console.log("object", $scope.object);
+			
 
 		}
 
@@ -68,6 +71,7 @@ TavernApp.controller("MainAppCtrl",
 		}
 
 
+		
 
 
 
