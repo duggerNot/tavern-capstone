@@ -32,7 +32,7 @@
 	 <!-- Class Select -->
 	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? NOT MVP!! -->
 	 <div class="input-field col s3">
-	    <select id="classSelect"ng-model="class">
+	    <select id="classSelect" ng-model="class">
 	      <option value="" disabled selected>Choose a Class</option>
 	      <option value="Barbarian">Barbarian</option>
 				<option value="Bard">Bard</option>
@@ -67,9 +67,29 @@
 	  </div>
 	</div>
 
+	<!-- Background -->
+	<div class="input-field">
+		<select id="backgrounds" ng-model="background">
+			<option value="" disabled selected>Pick Your Background</option>
+			<option value="Acolyte">Acolyte</option>
+			<option value="Charlatan">Charlatan</option>
+			<option value="Criminal">Criminal</option>
+			<option value="Entertainer">Entertainer</option>
+			<option value="Folk Hero">Folk Hero</option>
+			<option value="Guild Artisan">Guild Artisan</option>
+			<option value="Hermit">Hermit</option>
+			<option value="Noble">Noble</option>
+			<option value="Outlander">Outlander</option>
+			<option value="Sage">Sage</option>
+			<option value="Sailor">Sailor</option>
+			<option value="Soldier">Soldier</option>
+			<option value="Urchin">Urchin</option>
+		</select>
+	</div>
 
 
-<div class="statsBox" >
+<!-- Ability Scores -->
+<div class="statsBox"><h4>Ability Scores</h4>
 	<div ng-model="CharObject[Strength]">Strength: {{ CharObject.Strength }} <button ng-if="(CharObject.Strength != null)" ng-click="statRoll('Strength')">roll</button></div>
 	<div ng-model="CharObject[Dexterity]">Dexterity: {{ CharObject.Dexterity }} <button ng-if="(CharObject.Dexterity != null)" ng-click="statRoll('Dexterity')">roll</button></div>
 	<div ng-model="CharObject[Constitution]">Constitution: {{ CharObject.Constitution }} <button ng-if="(CharObject.Constitution != null)" ng-click="statRoll('Constitution')">roll</button></div>
@@ -80,6 +100,66 @@
 </div>
 <div ng-if="(CharObject.Constitution != null && CharObject.class != null)">Hit Points: {{ CharObject.HitPoints }}</div>
 <div ng-if="(CharObject.class != null)">Saving Throws: {{ CharObject.SavingThrows }}</div>
+
+
+<!-- Skills -->
+<div id="skillsBox"><h4>Choose 2:</h4>
+  <label>Acrobatics:
+    <input type="checkbox" ng-model="Acrobatics">
+  </label><br/>
+  <label>Animal Handling:
+    <input type="checkbox" ng-model="AnimalHandling">
+  </label><br/>
+  <label>Arcana:
+    <input type="checkbox" ng-model="Arcana">
+  </label><br/>
+	<label>Athletics:
+    <input type="checkbox" ng-model="Athletics">
+  </label><br/>
+  <label>Deception:
+    <input type="checkbox" ng-model="Deception">
+  </label><br/>
+    <label>History:
+    <input type="checkbox" ng-model="History">
+  </label><br/>
+    <label>Insight:
+    <input type="checkbox" ng-model="Insight">
+  </label><br/>
+    <label>Intimidation:
+    <input type="checkbox" ng-model="Intimidation">
+  </label><br/>
+    <label>Investigation:
+    <input type="checkbox" ng-model="Investigation">
+  </label><br/>
+    <label>Medicine:
+    <input type="checkbox" ng-model="Medicine">
+  </label><br/>
+    <label>Nature:
+    <input type="checkbox" ng-model="Nature">
+  </label><br/>
+    <label>Perception:
+    <input type="checkbox" ng-model="Perception">
+  </label><br/>
+    <label>Performance:
+    <input type="checkbox" ng-model="Performance">
+  </label><br/>
+    <label>Persuasion:
+    <input type="checkbox" ng-model="Persuasion">
+  </label><br/>
+    <label>Religion:
+    <input type="checkbox" ng-model="Religion">
+  </label><br/>
+    <label>Sleight of Hand:
+    <input type="checkbox" ng-model="SleightOfHand">
+  </label><br/>
+    <label>Stealth:
+    <input type="checkbox" ng-model="Stealth">
+  </label><br/>
+    <label>Survival:
+    <input type="checkbox" ng-model="Survival">
+  </label><br/>
+
+</div>
 <div ng-if="(CharObject.Charisma != null)"><button ng-click="saveChar()">
 SAVE</button></div>
 
