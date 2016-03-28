@@ -32,7 +32,7 @@
 	 <!-- Class Select -->
 	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? NOT MVP!! -->
 	 <div class="input-field col s3">
-	    <select id="classSelect" ng-model="class">
+	    <select id="classSelect" ng-model="class" ng-change="skillSelect()">
 	      <option value="" disabled selected>Choose a Class</option>
 	      <option value="Barbarian">Barbarian</option>
 				<option value="Bard">Bard</option>
@@ -69,7 +69,7 @@
 
 	<!-- Background -->
 	<div class="input-field">
-		<select id="backgrounds" ng-model="background">
+		<select id="backgrounds" ng-model="background" ng-change="backgroundSkills()">
 			<option value="" disabled selected>Pick Your Background</option>
 			<option value="Acolyte">Acolyte</option>
 			<option value="Charlatan">Charlatan</option>
@@ -103,60 +103,60 @@
 
 
 <!-- Skills -->
-<div id="skillsBox"><h4>Choose 2:</h4>
+<div id="skillsBox"><h4>Choose 2:</h4><h5>Bards can choose up to 3:</h5><h5>Rogues can choose up to 4:</h5>
   <label>Acrobatics:
-    <input type="checkbox" ng-model="Acrobatics">
+    <input type="checkbox" id="acrobaticsSkill" ng-model="Acrobatics" disabled>
   </label><br/>
   <label>Animal Handling:
-    <input type="checkbox" ng-model="AnimalHandling">
+    <input type="checkbox" id="animalhandlingSkill" ng-model="AnimalHandling" disabled>
   </label><br/>
   <label>Arcana:
-    <input type="checkbox" ng-model="Arcana">
+    <input type="checkbox" id="arcanaSkill" ng-model="Arcana" disabled>
   </label><br/>
 	<label>Athletics:
-    <input type="checkbox" ng-model="Athletics">
+    <input type="checkbox" id="athleticsSkill" ng-model="Athletics" disabled>
   </label><br/>
   <label>Deception:
-    <input type="checkbox" ng-model="Deception">
+    <input type="checkbox" id="deceptionSkill" ng-model="Deception" disabled>
   </label><br/>
     <label>History:
-    <input type="checkbox" ng-model="History">
+    <input type="checkbox" id="historySkill" ng-model="History" disabled>
   </label><br/>
     <label>Insight:
-    <input type="checkbox" ng-model="Insight">
+    <input type="checkbox" id="insightSkill" ng-model="Insight" disabled>
   </label><br/>
     <label>Intimidation:
-    <input type="checkbox" ng-model="Intimidation">
+    <input type="checkbox" id="intimidationSkill" ng-model="Intimidation" disabled>
   </label><br/>
     <label>Investigation:
-    <input type="checkbox" ng-model="Investigation">
+    <input type="checkbox" id="investigationSkill" ng-model="Investigation" disabled>
   </label><br/>
     <label>Medicine:
-    <input type="checkbox" ng-model="Medicine">
+    <input type="checkbox" id="medicineSkill" ng-model="Medicine"disabled>
   </label><br/>
     <label>Nature:
-    <input type="checkbox" ng-model="Nature">
+    <input type="checkbox" id="natureSkill" ng-model="Nature" disabled>
   </label><br/>
     <label>Perception:
-    <input type="checkbox" ng-model="Perception">
+    <input type="checkbox" id="perceptionSkill" ng-model="Perception" disabled>
   </label><br/>
     <label>Performance:
-    <input type="checkbox" ng-model="Performance">
+    <input type="checkbox" id="performanceSkill" ng-model="Performance" disabled>
   </label><br/>
     <label>Persuasion:
-    <input type="checkbox" ng-model="Persuasion">
+    <input type="checkbox" id="persuasionSkill" ng-model="Persuasion" disabled>
   </label><br/>
     <label>Religion:
-    <input type="checkbox" ng-model="Religion">
+    <input type="checkbox" id="religionSkill" ng-model="Religion" disabled>
   </label><br/>
     <label>Sleight of Hand:
-    <input type="checkbox" ng-model="SleightOfHand">
+    <input type="checkbox" id="sleightofhandSkill" ng-model="SleightOfHand" disabled>
   </label><br/>
     <label>Stealth:
-    <input type="checkbox" ng-model="Stealth">
+    <input type="checkbox" id="stealthSkill" ng-model="Stealth" disabled>
   </label><br/>
     <label>Survival:
-    <input type="checkbox" ng-model="Survival">
+    <input type="checkbox" id="survivalSkill" ng-model="Survival" disabled>
   </label><br/>
 
 </div>

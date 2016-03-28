@@ -6,9 +6,10 @@ TavernApp.controller("MainAppCtrl",
   "$http",
   "authFactory",
   "firebaseAuthURL",
+  "$document",
 
-  function($scope, $http, authFactory, firebaseAuthURL) {
-
+  function($scope, $http, authFactory, firebaseAuthURL, $document) {
+ 
 		$scope.dwarfSubRaces = ["Hill Dwarf", "Mountain Dwarf"];
 		$scope.elfSubRaces = ["High Elf", "Wood Elf", "Dark Elf"];
 		$scope.halflingSubRaces = ["Lightfoot", "Stout"];
@@ -107,7 +108,7 @@ TavernApp.controller("MainAppCtrl",
 			}
 		}
 
-		$scope.subRaceFilter = function() {
+		$scope.subRaceFilter = () => {
 			switch ($scope.selectedRace) {
 				case "Dwarf":
 					return $scope.dwarfSubRaces;
@@ -208,6 +209,227 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Wizard":
 					return "Intelligence & Wisdom"
+					break;
+			}
+		}
+// helper function to disable all skillboxes
+		$scope.disableAllSkills = () => {
+			angular.element(acrobaticsSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(animalhandlingSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(arcanaSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(athleticsSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(deceptionSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(historySkill)[0].setAttribute("disabled", "disabled");
+			angular.element(insightSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(intimidationSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(investigationSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(medicineSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(natureSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(perceptionSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(performanceSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(persuasionSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(religionSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(sleightofhandSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(stealthSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(survivalSkill)[0].setAttribute("disabled", "disabled");
+		}
+
+// enable skills based on class
+		$scope.skillSelect = () => {
+			switch ($scope.class) {
+				case "Barbarian":
+					$scope.disableAllSkills();
+					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(natureSkill)[0].removeAttribute("disabled");
+					angular.element(perceptionSkill)[0].removeAttribute("disabled");
+					angular.element(survivalSkill)[0].removeAttribute("disabled");
+					break;
+				case "Bard":
+					// Bards can choose 3 of ANY skill
+					$scope.disableAllSkills();
+					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
+					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
+					angular.element(arcanaSkill)[0].removeAttribute("disabled");
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(deceptionSkill)[0].removeAttribute("disabled");
+					angular.element(historySkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(investigationSkill)[0].removeAttribute("disabled");
+					angular.element(medicineSkill)[0].removeAttribute("disabled");
+					angular.element(natureSkill)[0].removeAttribute("disabled");
+					angular.element(perceptionSkill)[0].removeAttribute("disabled");
+					angular.element(performanceSkill)[0].removeAttribute("disabled");
+					angular.element(persuasionSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+					angular.element(sleightofhandSkill)[0].removeAttribute("disabled");
+					angular.element(stealthSkill)[0].removeAttribute("disabled");
+					angular.element(survivalSkill)[0].removeAttribute("disabled");
+
+					break;
+				case "Cleric":
+					$scope.disableAllSkills();
+					angular.element(historySkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(medicineSkill)[0].removeAttribute("disabled");
+					angular.element(persuasionSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+					break;
+				case "Druid":
+					$scope.disableAllSkills();
+					angular.element(arcanaSkill)[0].removeAttribute("disabled");
+					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(medicineSkill)[0].removeAttribute("disabled");
+					angular.element(natureSkill)[0].removeAttribute("disabled");
+					angular.element(perceptionSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+					angular.element(survivalSkill)[0].removeAttribute("disabled");
+					break;
+				case "Fighter":
+					$scope.disableAllSkills();
+					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
+					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(historySkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(perceptionSkill)[0].removeAttribute("disabled");
+					angular.element(survivalSkill)[0].removeAttribute("disabled");
+					break;
+				case "Monk":
+					$scope.disableAllSkills();
+					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(historySkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+					angular.element(stealthSkill)[0].removeAttribute("disabled");
+					break;
+				case "Paladin":
+					$scope.disableAllSkills();
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(medicineSkill)[0].removeAttribute("disabled");
+					angular.element(persuasionSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+					break;
+				case "Ranger":
+					$scope.disableAllSkills();
+					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(investigationSkill)[0].removeAttribute("disabled");
+					angular.element(natureSkill)[0].removeAttribute("disabled");
+					angular.element(perceptionSkill)[0].removeAttribute("disabled");
+					angular.element(stealthSkill)[0].removeAttribute("disabled");
+					angular.element(survivalSkill)[0].removeAttribute("disabled");
+					break;
+				case "Rogue": // rogues get 4 skills
+					$scope.disableAllSkills();
+					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
+					angular.element(athleticsSkill)[0].removeAttribute("disabled");
+					angular.element(deceptionSkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(investigationSkill)[0].removeAttribute("disabled");
+					angular.element(perceptionSkill)[0].removeAttribute("disabled");
+					angular.element(performanceSkill)[0].removeAttribute("disabled");
+					angular.element(persuasionSkill)[0].removeAttribute("disabled");
+					angular.element(sleightofhandSkill)[0].removeAttribute("disabled");
+					angular.element(stealthSkill)[0].removeAttribute("disabled");
+					break;
+				case "Sorcerer":
+					$scope.disableAllSkills();
+					angular.element(arcanaSkill)[0].removeAttribute("disabled");
+					angular.element(deceptionSkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(persuasionSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+					break;
+				case "Warlock":
+					$scope.disableAllSkills();
+					angular.element(arcanaSkill)[0].removeAttribute("disabled");
+					angular.element(deceptionSkill)[0].removeAttribute("disabled");
+					angular.element(historySkill)[0].removeAttribute("disabled");
+					angular.element(intimidationSkill)[0].removeAttribute("disabled");
+					angular.element(investigationSkill)[0].removeAttribute("disabled");
+					angular.element(natureSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+
+					break;
+				case "Wizard":
+					$scope.disableAllSkills();
+					angular.element(arcanaSkill)[0].removeAttribute("disabled");
+					angular.element(historySkill)[0].removeAttribute("disabled");
+					angular.element(insightSkill)[0].removeAttribute("disabled");
+					angular.element(investigationSkill)[0].removeAttribute("disabled");
+					angular.element(medicineSkill)[0].removeAttribute("disabled");
+					angular.element(religionSkill)[0].removeAttribute("disabled");
+
+					break;
+			}
+		}
+
+		$scope.backgroundSkills = () => {
+			switch ($scope.background) {
+				case "Acolyte":
+					angular.element(insightSkill)[0].setAttribute("checked", true);
+					angular.element(religionSkill)[0].setAttribute("checked", true);
+					break;
+				case "Charlatan":
+					angular.element(deceptionSkill)[0].setAttribute("checked", true);
+					angular.element(sleightofhandSkill)[0].setAttribute("checked", true);
+					break;
+				case "Criminal":
+					angular.element(deceptionSkill)[0].setAttribute("checked", true);
+					angular.element(stealthSkill)[0].setAttribute("checked", true);
+					break;
+				case "Entertainer":
+					angular.element(acrobaticsSkill)[0].setAttribute("checked", true);
+					angular.element(performanceSkill)[0].setAttribute("checked", true);
+					break;
+				case "Folk Hero":
+					angular.element(animalhandlingSkill)[0].setAttribute("checked", true);
+					angular.element(survivalSkill)[0].setAttribute("checked", true);
+					break;
+				case "Guild Artisan":
+					angular.element(insightSkill)[0].setAttribute("checked", true);
+					angular.element(persuasionSkill)[0].setAttribute("checked", true);
+					break;
+				case "Hermit":
+					angular.element(medicineSkill)[0].setAttribute("checked", true);
+					angular.element(religionSkill)[0].setAttribute("checked", true);
+					break;
+				case "Noble":
+					angular.element(historySkill)[0].setAttribute("checked", true);
+					angular.element(persuasionSkill)[0].setAttribute("checked", true);
+					break;
+				case "Outlander":
+					angular.element(athleticsSkill)[0].setAttribute("checked", true);
+					angular.element(survivalSkill)[0].setAttribute("checked", true);
+					break;
+				case "Sage":
+					angular.element(arcanaSkill)[0].setAttribute("checked", true);
+					angular.element(historySkill)[0].setAttribute("checked", true);
+					break;
+				case "Sailor":
+					angular.element(athleticsSkill)[0].setAttribute("checked", true);
+					angular.element(perceptionSkill)[0].setAttribute("checked", true);
+					break;
+				case "Soldier":
+					angular.element(athleticsSkill)[0].setAttribute("checked", true);
+					angular.element(intimidationSkill)[0].setAttribute("checked", true);
+					break;
+				case "Urchin":
+					angular.element(sleightofhandSkill)[0].setAttribute("checked", true);
+					angular.element(stealthSkill)[0].setAttribute("checked", true);
+					break;
+				default:
 					break;
 			}
 		}
