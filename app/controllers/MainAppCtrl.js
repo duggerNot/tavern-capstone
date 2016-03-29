@@ -6,9 +6,9 @@ TavernApp.controller("MainAppCtrl",
   "$http",
   "authFactory",
   "firebaseAuthURL",
-  "$document",
 
-  function($scope, $http, authFactory, firebaseAuthURL, $document) {
+
+  function($scope, $http, authFactory, firebaseAuthURL) {
  
 		$scope.dwarfSubRaces = ["Hill Dwarf", "Mountain Dwarf"];
 		$scope.elfSubRaces = ["High Elf", "Wood Elf", "Dark Elf"];
@@ -18,8 +18,8 @@ TavernApp.controller("MainAppCtrl",
   	$scope.CharObject = {};
   	$scope.CharObject.profBonus = 2;
 
-// this function rolls 4d6 and drops the lowest value and then adds the rest for attribute stats
-		$scope.statRoll = (attr) => {
+// // this function rolls 4d6 and drops the lowest value and then adds the rest for attribute stats
+		$scope.statRoll = function(attr) {
 			
 			let rollArray = [];
 			
@@ -46,7 +46,7 @@ TavernApp.controller("MainAppCtrl",
 			$scope.CharObject[attr] = finalRoll;
 		}
 
-		$scope.rollAll = () => {
+		$scope.rollAll = function() {
 			$scope.statRoll("Strength");
 			$scope.statRoll('Dexterity');
 			$scope.statRoll('Constitution');
@@ -55,7 +55,79 @@ TavernApp.controller("MainAppCtrl",
 			$scope.statRoll('Charisma');
 		}
 
-		$scope.determineMod = (ability) => {
+		$scope.applyBonus = function() {
+			switch ($scope.selectedRace) {
+				case "Human":
+					$scope.CharObject.Strength += 1;
+					$scope.CharObject.Dexterity += 1;
+					$scope.CharObject.Constitution += 1;
+					$scope.CharObject.Intelligence += 1;
+					$scope.CharObject.Wisdom += 1;
+					$scope.CharObject.Charisma += 1;
+					break;
+				case "Dragonborn":
+					$scope.CharObject.Strength += 2;
+					$scope.CharObject.Charisma += 1;
+					break;
+				case "Dwarf":
+					$scope.CharObject.Constitution += 2;
+					break;
+				case "Elf":
+					$scope.CharObject.Dexterity += 2;
+					break;
+				case "Halfling":
+					$scope.CharObject.Dexterity += 2;
+					break;
+				case "Gnome":
+					$scope.CharObject.Intelligence += 2;
+					break;
+				case "Tiefling":
+					$scope.CharObject.Charisma += 2;
+					$scope.CharObject.Intelligence += 1;
+					break;
+				case "Half-Elf":  // +1 to two abilities of your choice?
+					$scope.CharObject.Charisma += 2;
+					break;
+				default:
+					console.log("No Race selected, No bonus applied");
+					break;		
+			}
+			
+			switch ($scope.subRace) {
+				case "Hill Dwarf":
+					$scope.CharObject.Wisdom += 1;
+					break;
+				case "Mountain Dwarf":
+					$scope.CharObject.Strength += 2;
+					break;
+				case "High Elf":
+					$scope.CharObject.Intelligence += 1;
+					break;
+				case "Wood Elf":
+					$scope.CharObject.Wisdom += 1;
+					break;
+				case "Dark Elf":
+					$scope.CharObject.Charisma += 1;
+					break;
+				case "Lightfoot":
+					$scope.CharObject.Charisma += 1;
+					break;
+				case "Stout":
+					$scope.CharObject.Constitution += 1;
+					break;
+				case "Forest Gnome":
+					$scope.CharObject.Dexterity += 1;
+					break;
+				case "Rock Gnome":
+					$scope.CharObject.Constitution += 1;
+					break;
+				default:
+					console.log("No Sub Race Bonus");
+					break;
+			}	
+		}
+
+		$scope.determineMod = function(ability) {
 			switch (true) {
 				case (ability === 1):
 					return -5;
@@ -108,7 +180,7 @@ TavernApp.controller("MainAppCtrl",
 			}
 		}
 
-		$scope.subRaceFilter = () => {
+		$scope.subRaceFilter = function() {
 			switch ($scope.selectedRace) {
 				case "Dwarf":
 					return $scope.dwarfSubRaces;
@@ -131,7 +203,7 @@ TavernApp.controller("MainAppCtrl",
 		}
 
 
-		$scope.getHP = (charObj) => {
+		$scope.getHP = function(charObj) {
 			switch (charObj.class) {
 				case "Barbarian":
 					return (12 + charObj.ConMod);
@@ -172,7 +244,7 @@ TavernApp.controller("MainAppCtrl",
 			}
 
 		}
-		$scope.savingThrows = (charObj) => {
+		$scope.savingThrows = function(charObj) {
 			switch (charObj.class) {
 				case "Barbarian":
 					return "Strength & Constitution"
@@ -212,8 +284,34 @@ TavernApp.controller("MainAppCtrl",
 					break;
 			}
 		}
+
+		$scope.skillsCheckBox = {
+			Acrobatics: false,
+			AnimalHandling: false,
+			Arcana: false,
+			Athletics: false,
+			Deception: false,
+			History: false,
+			Insight: false,
+			Intimidation: false,
+			Investigation: false,
+			Medicine: false,
+			Nature: false,
+			Perception: false,
+			Performance: false,
+			Persuasion: false,
+			Religion: false,
+			SleightOfHand: false,
+			Stealth: false,
+			Survival: false
+		}
+
+
+
+
+
 // helper function to disable all skillboxes
-		$scope.disableAllSkills = () => {
+		$scope.disableAllSkills = function() {
 			angular.element(acrobaticsSkill)[0].setAttribute("disabled", "disabled");
 			angular.element(animalhandlingSkill)[0].setAttribute("disabled", "disabled");
 			angular.element(arcanaSkill)[0].setAttribute("disabled", "disabled");
@@ -231,14 +329,37 @@ TavernApp.controller("MainAppCtrl",
 			angular.element(religionSkill)[0].setAttribute("disabled", "disabled");
 			angular.element(sleightofhandSkill)[0].setAttribute("disabled", "disabled");
 			angular.element(stealthSkill)[0].setAttribute("disabled", "disabled");
-			angular.element(survivalSkill)[0].setAttribute("disabled", "disabled");
+			angular.element(survivalSkill)[0].setAttribute("disabled", "disabled");	
+		}
+
+// helper function to uncheck the skills
+		$scope.uncheckAllSkills = function() {
+			$scope.skillsCheckBox.Acrobatics = false;
+			$scope.skillsCheckBox.AnimalHandling = false;
+			$scope.skillsCheckBox.Arcana = false;
+			$scope.skillsCheckBox.Athletics = false;
+			$scope.skillsCheckBox.Deception = false;
+			$scope.skillsCheckBox.History = false;
+			$scope.skillsCheckBox.Insight = false;
+			$scope.skillsCheckBox.Intimidation = false;
+			$scope.skillsCheckBox.Investigation = false;
+			$scope.skillsCheckBox.Medicine = false;
+			$scope.skillsCheckBox.Nature = false;
+			$scope.skillsCheckBox.Perception = false;
+			$scope.skillsCheckBox.Performance = false;
+			$scope.skillsCheckBox.Persuasion = false;
+			$scope.skillsCheckBox.Religion = false;
+			$scope.skillsCheckBox.SleightOfHand = false;
+			$scope.skillsCheckBox.Stealth = false;
+			$scope.skillsCheckBox.Survival = false;
 		}
 
 // enable skills based on class
-		$scope.skillSelect = () => {
+		$scope.skillSelect = function() {
 			switch ($scope.class) {
 				case "Barbarian":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
 					angular.element(athleticsSkill)[0].removeAttribute("disabled");
 					angular.element(intimidationSkill)[0].removeAttribute("disabled");
@@ -249,6 +370,7 @@ TavernApp.controller("MainAppCtrl",
 				case "Bard":
 					// Bards can choose 3 of ANY skill
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
 					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
 					angular.element(arcanaSkill)[0].removeAttribute("disabled");
@@ -271,6 +393,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Cleric":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(historySkill)[0].removeAttribute("disabled");
 					angular.element(insightSkill)[0].removeAttribute("disabled");
 					angular.element(medicineSkill)[0].removeAttribute("disabled");
@@ -279,6 +402,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Druid":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(arcanaSkill)[0].removeAttribute("disabled");
 					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
 					angular.element(insightSkill)[0].removeAttribute("disabled");
@@ -290,6 +414,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Fighter":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
 					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
 					angular.element(athleticsSkill)[0].removeAttribute("disabled");
@@ -301,6 +426,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Monk":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
 					angular.element(athleticsSkill)[0].removeAttribute("disabled");
 					angular.element(historySkill)[0].removeAttribute("disabled");
@@ -310,6 +436,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Paladin":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(athleticsSkill)[0].removeAttribute("disabled");
 					angular.element(insightSkill)[0].removeAttribute("disabled");
 					angular.element(intimidationSkill)[0].removeAttribute("disabled");
@@ -319,6 +446,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Ranger":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(animalhandlingSkill)[0].removeAttribute("disabled");
 					angular.element(athleticsSkill)[0].removeAttribute("disabled");
 					angular.element(insightSkill)[0].removeAttribute("disabled");
@@ -330,6 +458,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Rogue": // rogues get 4 skills
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(acrobaticsSkill)[0].removeAttribute("disabled");
 					angular.element(athleticsSkill)[0].removeAttribute("disabled");
 					angular.element(deceptionSkill)[0].removeAttribute("disabled");
@@ -344,6 +473,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Sorcerer":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(arcanaSkill)[0].removeAttribute("disabled");
 					angular.element(deceptionSkill)[0].removeAttribute("disabled");
 					angular.element(insightSkill)[0].removeAttribute("disabled");
@@ -353,6 +483,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Warlock":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(arcanaSkill)[0].removeAttribute("disabled");
 					angular.element(deceptionSkill)[0].removeAttribute("disabled");
 					angular.element(historySkill)[0].removeAttribute("disabled");
@@ -364,6 +495,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case "Wizard":
 					$scope.disableAllSkills();
+					$scope.uncheckAllSkills();
 					angular.element(arcanaSkill)[0].removeAttribute("disabled");
 					angular.element(historySkill)[0].removeAttribute("disabled");
 					angular.element(insightSkill)[0].removeAttribute("disabled");
@@ -375,67 +507,84 @@ TavernApp.controller("MainAppCtrl",
 			}
 		}
 
-		$scope.backgroundSkills = () => {
+
+
+
+		$scope.backgroundSkills = function() {
 			switch ($scope.background) {
 				case "Acolyte":
-					angular.element(insightSkill)[0].setAttribute("checked", true);
-					angular.element(religionSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Insight = true;
+					$scope.skillsCheckBox.Religion = true;
 					break;
 				case "Charlatan":
-					angular.element(deceptionSkill)[0].setAttribute("checked", true);
-					angular.element(sleightofhandSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Deception = true;
+					$scope.skillsCheckBox.SleightOfHand = true;
 					break;
 				case "Criminal":
-					angular.element(deceptionSkill)[0].setAttribute("checked", true);
-					angular.element(stealthSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Deception = true;
+					$scope.skillsCheckBox.Stealth = true;
 					break;
 				case "Entertainer":
-					angular.element(acrobaticsSkill)[0].setAttribute("checked", true);
-					angular.element(performanceSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Acrobatics = true;
+					$scope.skillsCheckBox.Performance = true;
 					break;
 				case "Folk Hero":
-					angular.element(animalhandlingSkill)[0].setAttribute("checked", true);
-					angular.element(survivalSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.AnimalHandling = true;
+					$scope.skillsCheckBox.Survival = true;
 					break;
 				case "Guild Artisan":
-					angular.element(insightSkill)[0].setAttribute("checked", true);
-					angular.element(persuasionSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Insight = true;
+					$scope.skillsCheckBox.Persuasion = true;
 					break;
 				case "Hermit":
-					angular.element(medicineSkill)[0].setAttribute("checked", true);
-					angular.element(religionSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Medicine = true;
+					$scope.skillsCheckBox.Religion = true;
 					break;
 				case "Noble":
-					angular.element(historySkill)[0].setAttribute("checked", true);
-					angular.element(persuasionSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.History = true;
+					$scope.skillsCheckBox.Persuasion = true;
 					break;
 				case "Outlander":
-					angular.element(athleticsSkill)[0].setAttribute("checked", true);
-					angular.element(survivalSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Athletics = true;
+					$scope.skillsCheckBox.Survival = true;
 					break;
 				case "Sage":
-					angular.element(arcanaSkill)[0].setAttribute("checked", true);
-					angular.element(historySkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Arcana = true;
+					$scope.skillsCheckBox.History = true;
 					break;
 				case "Sailor":
-					angular.element(athleticsSkill)[0].setAttribute("checked", true);
-					angular.element(perceptionSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Athletics = true;
+					$scope.skillsCheckBox.Perception = true;
 					break;
 				case "Soldier":
-					angular.element(athleticsSkill)[0].setAttribute("checked", true);
-					angular.element(intimidationSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.Athletics = true;
+					$scope.skillsCheckBox.Intimidation = true;
 					break;
 				case "Urchin":
-					angular.element(sleightofhandSkill)[0].setAttribute("checked", true);
-					angular.element(stealthSkill)[0].setAttribute("checked", true);
+					$scope.uncheckAllSkills();
+					$scope.skillsCheckBox.SleightOfHand = true;
+					$scope.skillsCheckBox.Stealth = true;
 					break;
 				default:
 					break;
 			}
+
 		}
 		
 
-		$scope.saveChar = () => {
+		$scope.saveChar = function() {
 			$scope.CharObject.name = $scope.charName;
 			$scope.CharObject.race = $scope.selectedRace;
 			$scope.CharObject.subRace = $scope.subRace;
