@@ -6,9 +6,10 @@ TavernApp.controller("MainAppCtrl",
   "$http",
   "authFactory",
   "firebaseAuthURL",
+  "$location",
 
 
-  function($scope, $http, authFactory, firebaseAuthURL) {
+  function($scope, $http, authFactory, firebaseAuthURL, $location) {
  
 		$scope.dwarfSubRaces = ["Hill Dwarf", "Mountain Dwarf"];
 		$scope.elfSubRaces = ["High Elf", "Wood Elf", "Dark Elf"];
@@ -92,6 +93,10 @@ TavernApp.controller("MainAppCtrl",
 						break;
 					case "Half-Elf":  // +1 to two abilities of your choice?
 						$scope.CharObject.Charisma += 2;
+						break;
+					case "Half-Orc":
+						$scope.CharObject.Strength += 2;
+						$scope.CharObject.Constitution += 1;
 						break;
 					default:
 						console.log("No Race selected, No bonus applied");
@@ -207,9 +212,6 @@ TavernApp.controller("MainAppCtrl",
 				default:
 					break;
 			}
-			// if ($scope.applied === true) {
-			// 	$scope.rollAll();
-			// }
 		};
 
 
@@ -252,7 +254,6 @@ TavernApp.controller("MainAppCtrl",
 					return (6 + charObj.ConMod);
 					break;
 			}
-			$scope.CharObject.HitPoints = $scope.getHP($scope.CharObject);
 		}
 		$scope.savingThrows = function(charObj) {
 			switch (charObj.class) {
@@ -609,9 +610,6 @@ TavernApp.controller("MainAppCtrl",
 		}
 
 		$scope.skillsLimit = function() {
-			// disable the skill checkbox when 4 skills are checked
-			// 5 for bards
-			// 6 for rogues
 			if ($scope.class === "Bard"){
 				if ($scope.selectedSkills <= 3) {
 					$scope.selectedSkills++
@@ -635,6 +633,74 @@ TavernApp.controller("MainAppCtrl",
 					$scope.disableAllSkills();
 				}
 			}
+		};
+
+		$scope.getSpeed = function(charObj) {
+			switch (charObj.race){
+				case "Dwarf":
+					return 25;
+					break;
+				case "Elf":
+					return 30;
+					break;
+				case "Halfling":
+					return 25;
+					break;
+				case "Human":
+					return 30;
+					break;
+				case "Dragonborn":
+					return 30;
+					break;
+				case "Gnome":
+					return 25;
+					break;
+				case "Half-Elf":
+					return 30;
+					break;
+				case "Half-Orc":
+					return 30;
+					break;
+				case "Tiefling":
+					return 30;
+					break;
+				default:
+					break;
+			}
+		}
+
+		$scope.getSize = function(charObj) {
+			switch (charObj.race){
+				case "Dwarf":
+					return "Medium";
+					break;
+				case "Elf":
+					return "Medium";
+					break;
+				case "Halfling":
+					return "Small";
+					break;
+				case "Human":
+					return "Medium";
+					break;
+				case "Dragonborn":
+					return "Medium";
+					break;
+				case "Gnome":
+					return "Small";
+					break;
+				case "Half-Elf":
+					return "Medium";
+					break;
+				case "Half-Orc":
+					return "Medium";
+					break;
+				case "Tiefling":
+					return "Medium";
+					break;
+				default:
+					break;
+			}
 		}
 		
 
@@ -645,6 +711,10 @@ TavernApp.controller("MainAppCtrl",
 			$scope.CharObject.subRace = $scope.subRace;
 			$scope.CharObject.class = $scope.class;
 			$scope.CharObject.alignment = $scope.alignment;
+			$scope.CharObject.background = $scope.background;
+
+			$scope.CharObject.speed = $scope.getSpeed($scope.CharObject);
+			$scope.CharObject.size = $scope.getSize($scope.CharObject);
 
 			$scope.CharObject.StrMod = $scope.determineMod($scope.CharObject.Strength);
 			$scope.CharObject.DexMod = $scope.determineMod($scope.CharObject.Dexterity);
@@ -661,20 +731,16 @@ TavernApp.controller("MainAppCtrl",
 					$scope.skillArray.push(skill);
 				}
 			}
-
 			$scope.CharObject.skillProfs = $scope.skillArray;
-
 			console.log("object", $scope.CharObject);
+      $http.post(
+        "https://tavernapp.firebaseio.com/characters.json",
+        JSON.stringify($scope.CharObject)
+      ).then(
+        () => $location.url("/CharList"),      
+        (response) => console.log(response)  
+      );
 		}
-
-
-
-
-
-
-
-
-
 
 	}
 ]);

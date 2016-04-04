@@ -1,3 +1,9 @@
-<div>
-	<p>List Users Characters Here:</p>
+<div id="charListView">
+	<h4>Your Characters:</h4>
+<section>
+
+    <div ng-repeat="char in characters">
+      <a href="#/CharList/{{ char.id }}" class="hoverable center-align waves-effect waves-teal btn-flat">{{ char.name }} Level 1 {{char.race}} {{char.class}}</a>
+    </div>
+  </section>
 </div>
