@@ -17,6 +17,9 @@ TavernApp.controller("MainAppCtrl",
 		$scope.gnomeSubRaces = ["Forest Gnome", "Rock Gnome"];
   	$scope.CharObject = {};
   	$scope.CharObject.profBonus = 2;
+  	$scope.applied = false;
+  	$scope.selectedSkills = 0;
+  	$scope.skillArray = [];
 
 // // this function rolls 4d6 and drops the lowest value and then adds the rest for attribute stats
 		$scope.statRoll = function(attr) {
@@ -53,79 +56,83 @@ TavernApp.controller("MainAppCtrl",
 			$scope.statRoll('Intelligence');
 			$scope.statRoll('Wisdom');
 			$scope.statRoll('Charisma');
+			$scope.applied = false;
 		}
 
 		$scope.applyBonus = function() {
-			switch ($scope.selectedRace) {
-				case "Human":
-					$scope.CharObject.Strength += 1;
-					$scope.CharObject.Dexterity += 1;
-					$scope.CharObject.Constitution += 1;
-					$scope.CharObject.Intelligence += 1;
-					$scope.CharObject.Wisdom += 1;
-					$scope.CharObject.Charisma += 1;
-					break;
-				case "Dragonborn":
-					$scope.CharObject.Strength += 2;
-					$scope.CharObject.Charisma += 1;
-					break;
-				case "Dwarf":
-					$scope.CharObject.Constitution += 2;
-					break;
-				case "Elf":
-					$scope.CharObject.Dexterity += 2;
-					break;
-				case "Halfling":
-					$scope.CharObject.Dexterity += 2;
-					break;
-				case "Gnome":
-					$scope.CharObject.Intelligence += 2;
-					break;
-				case "Tiefling":
-					$scope.CharObject.Charisma += 2;
-					$scope.CharObject.Intelligence += 1;
-					break;
-				case "Half-Elf":  // +1 to two abilities of your choice?
-					$scope.CharObject.Charisma += 2;
-					break;
-				default:
-					console.log("No Race selected, No bonus applied");
-					break;		
+			if ($scope.applied === false) {
+				switch ($scope.selectedRace) {
+					case "Human":
+						$scope.CharObject.Strength += 1;
+						$scope.CharObject.Dexterity += 1;
+						$scope.CharObject.Constitution += 1;
+						$scope.CharObject.Intelligence += 1;
+						$scope.CharObject.Wisdom += 1;
+						$scope.CharObject.Charisma += 1;
+						break;
+					case "Dragonborn":
+						$scope.CharObject.Strength += 2;
+						$scope.CharObject.Charisma += 1;
+						break;
+					case "Dwarf":
+						$scope.CharObject.Constitution += 2;
+						break;
+					case "Elf":
+						$scope.CharObject.Dexterity += 2;
+						break;
+					case "Halfling":
+						$scope.CharObject.Dexterity += 2;
+						break;
+					case "Gnome":
+						$scope.CharObject.Intelligence += 2;
+						break;
+					case "Tiefling":
+						$scope.CharObject.Charisma += 2;
+						$scope.CharObject.Intelligence += 1;
+						break;
+					case "Half-Elf":  // +1 to two abilities of your choice?
+						$scope.CharObject.Charisma += 2;
+						break;
+					default:
+						console.log("No Race selected, No bonus applied");
+						break;		
+				}
+				switch ($scope.subRace) {
+					case "Hill Dwarf":
+						$scope.CharObject.Wisdom += 1;
+						break;
+					case "Mountain Dwarf":
+						$scope.CharObject.Strength += 2;
+						break;
+					case "High Elf":
+						$scope.CharObject.Intelligence += 1;
+						break;
+					case "Wood Elf":
+						$scope.CharObject.Wisdom += 1;
+						break;
+					case "Dark Elf":
+						$scope.CharObject.Charisma += 1;
+						break;
+					case "Lightfoot":
+						$scope.CharObject.Charisma += 1;
+						break;
+					case "Stout":
+						$scope.CharObject.Constitution += 1;
+						break;
+					case "Forest Gnome":
+						$scope.CharObject.Dexterity += 1;
+						break;
+					case "Rock Gnome":
+						$scope.CharObject.Constitution += 1;
+						break;
+					default:
+						console.log("No Sub Race Bonus");
+						break;
+				}
+			$scope.applied = true;
 			}
-			
-			switch ($scope.subRace) {
-				case "Hill Dwarf":
-					$scope.CharObject.Wisdom += 1;
-					break;
-				case "Mountain Dwarf":
-					$scope.CharObject.Strength += 2;
-					break;
-				case "High Elf":
-					$scope.CharObject.Intelligence += 1;
-					break;
-				case "Wood Elf":
-					$scope.CharObject.Wisdom += 1;
-					break;
-				case "Dark Elf":
-					$scope.CharObject.Charisma += 1;
-					break;
-				case "Lightfoot":
-					$scope.CharObject.Charisma += 1;
-					break;
-				case "Stout":
-					$scope.CharObject.Constitution += 1;
-					break;
-				case "Forest Gnome":
-					$scope.CharObject.Dexterity += 1;
-					break;
-				case "Rock Gnome":
-					$scope.CharObject.Constitution += 1;
-					break;
-				default:
-					console.log("No Sub Race Bonus");
-					break;
-			}	
-		}
+			};
+
 
 		$scope.determineMod = function(ability) {
 			switch (true) {
@@ -200,7 +207,10 @@ TavernApp.controller("MainAppCtrl",
 				default:
 					break;
 			}
-		}
+			// if ($scope.applied === true) {
+			// 	$scope.rollAll();
+			// }
+		};
 
 
 		$scope.getHP = function(charObj) {
@@ -242,7 +252,7 @@ TavernApp.controller("MainAppCtrl",
 					return (6 + charObj.ConMod);
 					break;
 			}
-
+			$scope.CharObject.HitPoints = $scope.getHP($scope.CharObject);
 		}
 		$scope.savingThrows = function(charObj) {
 			switch (charObj.class) {
@@ -283,6 +293,7 @@ TavernApp.controller("MainAppCtrl",
 					return "Intelligence & Wisdom"
 					break;
 			}
+			$scope.CharObject.SavingThrows = $scope.savingThrows($scope.CharObject);
 		}
 
 		$scope.skillsCheckBox = {
@@ -352,6 +363,7 @@ TavernApp.controller("MainAppCtrl",
 			$scope.skillsCheckBox.SleightOfHand = false;
 			$scope.skillsCheckBox.Stealth = false;
 			$scope.skillsCheckBox.Survival = false;
+			$scope.selectedSkills = 0;
 		}
 
 // enable skills based on class
@@ -516,75 +528,118 @@ TavernApp.controller("MainAppCtrl",
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Insight = true;
 					$scope.skillsCheckBox.Religion = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Charlatan":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Deception = true;
 					$scope.skillsCheckBox.SleightOfHand = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Criminal":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Deception = true;
 					$scope.skillsCheckBox.Stealth = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Entertainer":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Acrobatics = true;
 					$scope.skillsCheckBox.Performance = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Folk Hero":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.AnimalHandling = true;
 					$scope.skillsCheckBox.Survival = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Guild Artisan":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Insight = true;
 					$scope.skillsCheckBox.Persuasion = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Hermit":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Medicine = true;
 					$scope.skillsCheckBox.Religion = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Noble":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.History = true;
 					$scope.skillsCheckBox.Persuasion = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Outlander":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Athletics = true;
 					$scope.skillsCheckBox.Survival = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Sage":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Arcana = true;
 					$scope.skillsCheckBox.History = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Sailor":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Athletics = true;
 					$scope.skillsCheckBox.Perception = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Soldier":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.Athletics = true;
 					$scope.skillsCheckBox.Intimidation = true;
+					$scope.selectedSkills = 2;
 					break;
 				case "Urchin":
 					$scope.uncheckAllSkills();
 					$scope.skillsCheckBox.SleightOfHand = true;
 					$scope.skillsCheckBox.Stealth = true;
+					$scope.selectedSkills = 2;
 					break;
 				default:
 					break;
 			}
 
 		}
+
+		$scope.skillsLimit = function() {
+			// disable the skill checkbox when 4 skills are checked
+			// 5 for bards
+			// 6 for rogues
+			if ($scope.class === "Bard"){
+				if ($scope.selectedSkills <= 3) {
+					$scope.selectedSkills++
+					console.log("skill #", $scope.selectedSkills);
+				} else {
+					$scope.disableAllSkills();
+				}
+			} else if ($scope.class === "Rogue") {
+					if ($scope.selectedSkills <= 4) {
+						$scope.selectedSkills++
+						console.log("skill #", $scope.selectedSkills);
+					} else {
+						$scope.disableAllSkills();
+					}
+
+			} else {
+				if ($scope.selectedSkills <= 2) {
+					$scope.selectedSkills++
+					console.log("skill #", $scope.selectedSkills);
+				} else {
+					$scope.disableAllSkills();
+				}
+			}
+		}
 		
 
 		$scope.saveChar = function() {
+
 			$scope.CharObject.name = $scope.charName;
 			$scope.CharObject.race = $scope.selectedRace;
 			$scope.CharObject.subRace = $scope.subRace;
@@ -600,6 +655,15 @@ TavernApp.controller("MainAppCtrl",
 
 			$scope.CharObject.HitPoints = $scope.getHP($scope.CharObject);
 			$scope.CharObject.SavingThrows = $scope.savingThrows($scope.CharObject);
+
+			for (let skill in $scope.skillsCheckBox){
+				if ($scope.skillsCheckBox[skill] === true) {
+					$scope.skillArray.push(skill);
+				}
+			}
+
+			$scope.CharObject.skillProfs = $scope.skillArray;
+
 			console.log("object", $scope.CharObject);
 		}
 

@@ -7,6 +7,7 @@
 
 
 <!-- Race Select -->
+<div id="charBlock">
 		<div class="input-field col s3">
 	    <select id="raceSelect" ng-model="selectedRace" ng-change="subRaceFilter()">
 	      <option value="" disabled selected>Choose a Race</option>
@@ -66,7 +67,7 @@
 				<option value="Chaotic Evil">Chaotic Evil</option>
 	    </select>
 	  </div>
-	</div>
+
 
 	<!-- Background -->
 	<div class="input-field">
@@ -87,6 +88,7 @@
 			<option value="Urchin">Urchin</option>
 		</select>
 	</div>
+</div>
 
 
 <!-- Ability Scores -->
@@ -104,60 +106,60 @@
 
 
 <!-- Skills -->
-<div id="skillsBox"><h4>Choose 2:</h4><h5>Bards can choose up to 3:</h5><h5>Rogues can choose up to 4:</h5>
+<div id="skillsBox"><h4>Skills</h4><h5>Choose 2:</h5><h5>Bards can choose up to 3:</h5><h5>Rogues can choose up to 4:</h5>
   <label>Acrobatics:
-    <input type="checkbox" id="acrobaticsSkill" ng-model="skillsCheckBox.Acrobatics" disabled>
+    <input type="checkbox" id="acrobaticsSkill" ng-model="skillsCheckBox.Acrobatics" ng-click="skillsLimit()" disabled>
   </label><br/>
   <label>Animal Handling:
-    <input type="checkbox" id="animalhandlingSkill" ng-model="skillsCheckBox.AnimalHandling" disabled>
+    <input type="checkbox" id="animalhandlingSkill" ng-model="skillsCheckBox.AnimalHandling" ng-click="skillsLimit()" disabled>
   </label><br/>
   <label>Arcana:
-    <input type="checkbox" id="arcanaSkill" ng-model="skillsCheckBox.Arcana" disabled>
+    <input type="checkbox" id="arcanaSkill" ng-model="skillsCheckBox.Arcana" ng-click="skillsLimit()" disabled>
   </label><br/>
 	<label>Athletics:
-    <input type="checkbox" id="athleticsSkill" ng-model="skillsCheckBox.Athletics" disabled>
+    <input type="checkbox" id="athleticsSkill" ng-model="skillsCheckBox.Athletics" ng-click="skillsLimit()" disabled>
   </label><br/>
   <label>Deception:
-    <input type="checkbox" id="deceptionSkill" ng-model="skillsCheckBox.Deception" disabled>
+    <input type="checkbox" id="deceptionSkill" ng-model="skillsCheckBox.Deception" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>History:
-    <input type="checkbox" id="historySkill" ng-model="skillsCheckBox.History" disabled>
+    <input type="checkbox" id="historySkill" ng-model="skillsCheckBox.History" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Insight:
-    <input type="checkbox" id="insightSkill" ng-model="skillsCheckBox.Insight" disabled>
+    <input type="checkbox" id="insightSkill" ng-model="skillsCheckBox.Insight" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Intimidation:
-    <input type="checkbox" id="intimidationSkill" ng-model="skillsCheckBox.Intimidation" disabled>
+    <input type="checkbox" id="intimidationSkill" ng-model="skillsCheckBox.Intimidation" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Investigation:
-    <input type="checkbox" id="investigationSkill" ng-model="skillsCheckBox.Investigation" disabled>
+    <input type="checkbox" id="investigationSkill" ng-model="skillsCheckBox.Investigation" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Medicine:
-    <input type="checkbox" id="medicineSkill" ng-model="skillsCheckBox.Medicine"disabled>
+    <input type="checkbox" id="medicineSkill" ng-model="skillsCheckBox.Medicine" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Nature:
-    <input type="checkbox" id="natureSkill" ng-model="skillsCheckBox.Nature" disabled>
+    <input type="checkbox" id="natureSkill" ng-model="skillsCheckBox.Nature" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Perception:
-    <input type="checkbox" id="perceptionSkill" ng-model="skillsCheckBox.Perception" disabled>
+    <input type="checkbox" id="perceptionSkill" ng-model="skillsCheckBox.Perception" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Performance:
-    <input type="checkbox" id="performanceSkill" ng-model="skillsCheckBox.Performance" disabled>
+    <input type="checkbox" id="performanceSkill" ng-model="skillsCheckBox.Performance" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Persuasion:
-    <input type="checkbox" id="persuasionSkill" ng-model="skillsCheckBox.Persuasion" disabled>
+    <input type="checkbox" id="persuasionSkill" ng-model="skillsCheckBox.Persuasion" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Religion:
-    <input type="checkbox" id="religionSkill" ng-model="skillsCheckBox.Religion" disabled>
+    <input type="checkbox" id="religionSkill" ng-model="skillsCheckBox.Religion" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Sleight of Hand:
-    <input type="checkbox" id="sleightofhandSkill" ng-model="skillsCheckBox.SleightOfHand" disabled>
+    <input type="checkbox" id="sleightofhandSkill" ng-model="skillsCheckBox.SleightOfHand" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Stealth:
-    <input type="checkbox" id="stealthSkill" ng-model="skillsCheckBox.Stealth" disabled>
+    <input type="checkbox" id="stealthSkill" ng-model="skillsCheckBox.Stealth" ng-click="skillsLimit()" disabled>
   </label><br/>
     <label>Survival:
-    <input type="checkbox" id="survivalSkill" ng-model="skillsCheckBox.Survival" disabled>
+    <input type="checkbox" id="survivalSkill" ng-model="skillsCheckBox.Survival" ng-click="skillsLimit()" disabled>
   </label><br/>
 
 </div>
