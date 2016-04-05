@@ -1,37 +1,31 @@
-<section>
-  <div>
-    <h4>{{character.name}}</h4>
-    <p>Level 1 {{character.class}}</p>
-    <p>Race: {{character.race}}</p>
-    <p ng-if="character.subRace != null">Sub-Race: {{character.subRace}}</p>
-    <p>Background: {{character.background}}</p>
-    <p>Alignment: {{character.alignment}}</p>
+<div class="container">
+  <div class="row">
+  	<div class="col s4">
+	    <h4>{{character.name}}</h4>
+	    <p>Level 1 {{character.class}}</p>
+	    <p>Race: {{character.race}}</p>
+	    <p ng-if="character.subRace != null">Sub-Race: {{character.subRace}}</p>
+	    <p>Background: {{character.background}}</p>
+	    <p>Alignment: {{character.alignment}}</p>
 
-		<p>Hit Points: {{character.HitPoints}}</p>
-    <p>Proficiency Bonus: {{character.profBonus}}</p>
-    <p>Saving Throws: {{character.SavingThrows}}</p>
-    <p>Size: {{character.size}}</p>
-    <p>Base Speed: {{character.speed}}</p>
-
-
-    <h5>Ability Scores:</h5>
-    <p>Strength: {{character.Strength}}({{character.StrMod}})</p>
-    <p>Dexterity: {{character.Dexterity}}({{character.DexMod}})</p>
-    <p>Constitution: {{character.Constitution}}({{character.ConMod}})</p>
-    <p>Intelligence: {{character.Intelligence}}({{character.IntMod}})</p>
-    <p>Wisdom: {{character.Wisdom}}({{character.WisMod}})</p>
-    <p>Charisma: {{character.Charisma}}({{character.ChaMod}})</p>
-
-
-		<h5>Skill Proficiencies:</h5>
-    <p ng-repeat="skill in character.skillProfs">{{skill}}</p>
-
-
-
-
-
-
+			<p>Hit Points: {{character.HitPoints}}</p>
+	    <p>Proficiency Bonus: {{character.profBonus}}</p>
+	    <p>Saving Throws: {{character.SavingThrows}}</p>
+	    <p>Size: {{character.size}}</p>
+	    <p>Base Speed: {{character.speed}}</p>
+    </div>
+		<div class="col s4">
+	    <h5>Ability Scores:</h5>
+	    <p>Strength: {{character.Strength}} ({{character.StrMod}})</p>
+	    <p>Dexterity: {{character.Dexterity}} ({{character.DexMod}})</p>
+	    <p>Constitution: {{character.Constitution}} ({{character.ConMod}})</p>
+	    <p>Intelligence: {{character.Intelligence}} ({{character.IntMod}})</p>
+	    <p>Wisdom: {{character.Wisdom}} ({{character.WisMod}})</p>
+	    <p>Charisma: {{character.Charisma}} ({{character.ChaMod}})</p>
+		</div>
+		<div class="col s4">
+			<h5>Skill Proficiencies:</h5>
+	    <p ng-repeat="skill in character.skillProfs">{{skill}}</p>
+		</div>
   </div>
-
-
-</section>
+</div>
