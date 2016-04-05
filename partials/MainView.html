@@ -1,15 +1,16 @@
 <!-- Char Name -->
-	<div class="row">
-		<div class="input-field col s3">
-  		<input placeholder="Character Name" id="char_name" type="text" ng-model="charName">
-  	</div>
+<div class="container">
+<div class="row">
+	<div class="input-field col s4">
+  	<input placeholder="Character Name" id="char_name" type="text" ng-model="charName">
+  </div>
 
 
 
 <!-- Race Select -->
-<div id="charBlock">
-		<div class="input-field col s3">
-	    <select id="raceSelect" ng-model="selectedRace" ng-change="subRaceFilter()">
+	<div id="charBlock">
+		<div class="input-field col s4">
+	    <select id="raceSelect" ng-model="selectedRace" ng-change="subRaceFilter()" class="browser-default">
 	      <option value="" disabled selected>Choose a Race</option>
 	      <option value="Human">Human</option>
 				<option value="Dwarf">Dwarf</option>
@@ -19,22 +20,24 @@
 				<option value="Half-Elf">Half-Elf</option>
 				<option value="Half-Orc">Half-Orc</option>
 				<option value="Dragonborn">Dragonborn</option>
-				<option value="Tiefling">Tiefling</option>
+				<option value="Tiefling">Tiefling</option>z
 	    </select>
 	  </div>
 
-	  <div class="input-field col s3">
+	  <div class="input-field col s4">
 			<select id="subRaceSelect"  ng-model="subRace"
-				ng-options="value for value in subRaceFilter()">
+				ng-options="value for value in subRaceFilter()" class="browser-default">
 				<option value="" disabled selected>Choose a Sub-Race</option>
 			</select>
 		</div>
-
+	</div>
+</div>
 
 	 <!-- Class Select -->
 	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? NOT MVP!! -->
-	 <div class="input-field col s3">
-	    <select id="classSelect" ng-model="class" ng-change="skillSelect()">
+	 <div class="row">
+	 <div class="input-field col s4">
+	    <select id="classSelect" ng-model="class" ng-change="skillSelect()" class="browser-default">
 	      <option value="" disabled selected>Choose a Class</option>
 	      <option value="Barbarian">Barbarian</option>
 				<option value="Bard">Bard</option>
@@ -53,8 +56,8 @@
 
 
 	  <!-- Alignment -->
-	<div class="input-field col s3">
-	    <select id="alignmentSelect" ng-model="alignment">
+	<div class="input-field col s4">
+	    <select id="alignmentSelect" ng-model="alignment" class="browser-default">
 	      <option value="" disabled selected>Pick your Alignment</option>
 	      <option value="Lawful Good">Lawful Good</option>
 				<option value="Lawful Neutral">Lawful Neutral</option>
@@ -70,8 +73,8 @@
 
 
 	<!-- Background -->
-	<div class="input-field">
-		<select id="backgrounds" ng-model="background" ng-change="backgroundSkills()">
+	<div class="input-field col s4">
+		<select id="backgrounds" ng-model="background" ng-change="backgroundSkills()" class="browser-default">
 			<option value="" disabled selected>Pick Your Background</option>
 			<option value="Acolyte">Acolyte</option>
 			<option value="Charlatan">Charlatan</option>
@@ -91,89 +94,103 @@
 </div>
 
 
+
 <!-- Ability Scores -->
-<div class="statsBox"><h4>Ability Scores</h4>
-	<div ng-model="CharObject[Strength]">Strength: {{ CharObject.Strength }} <button ng-if="(CharObject.Strength != null)" ng-click="statRoll('Strength')">roll</button></div>
-	<div ng-model="CharObject[Dexterity]">Dexterity: {{ CharObject.Dexterity }} <button ng-if="(CharObject.Dexterity != null)" ng-click="statRoll('Dexterity')">roll</button></div>
-	<div ng-model="CharObject[Constitution]">Constitution: {{ CharObject.Constitution }} <button ng-if="(CharObject.Constitution != null)" ng-click="statRoll('Constitution')">roll</button></div>
-	<div ng-model="CharObject[Intelligence]">Intelligence: {{ CharObject.Intelligence }} <button ng-if="(CharObject.Intelligence != null)" ng-click="statRoll('Intelligence')">roll</button></div>
-	<div ng-model="CharObject[Wisdom]">Wisdom: {{ CharObject.Wisdom }} <button ng-if="(CharObject.Wisdom != null)" ng-click="statRoll('Wisdom')">roll</button></div>
-	<div ng-model="CharObject[Charisma]">Charisma: {{ CharObject.Charisma }} <button ng-if="(CharObject.Charisma != null)" ng-click="statRoll('Charisma')">roll</button></div>
-	<div><button ng-click="rollAll()">Roll for Scores</button><button ng-click="applyBonus()">Apply Racial Bonuses</button></div>
+<div class="row">
+	<div class="col s6"><h5>Ability Scores:</h5></div>
+	<div class="col s6"><h5>Skills:</h5></div>
 </div>
-<div ng-if="(CharObject.Constitution != null && CharObject.class != null)">Hit Points: {{ CharObject.HitPoints }}</div>
-<div ng-if="(CharObject.class != null)">Saving Throws: {{ CharObject.SavingThrows }}</div>
+
+
+<div class="row">
+<div class="statsBox col s6">
+	<div ng-model="CharObject[Strength]">Strength: {{ CharObject.Strength }}  <a class="waves-effect waves-green btn-flat" ng-if="(CharObject.Strength != null)" ng-click="statRoll('Strength')">roll</a></div>
+	<div ng-model="CharObject[Dexterity]">Dexterity: {{ CharObject.Dexterity }}  <a class="waves-effect waves-green btn-flat" ng-if="(CharObject.Dexterity != null)" ng-click="statRoll('Dexterity')">roll</a></div>
+	<div ng-model="CharObject[Constitution]">Constitution: {{ CharObject.Constitution }}  <a class="waves-effect waves-green btn-flat" ng-if="(CharObject.Constitution != null)" ng-click="statRoll('Constitution')">roll</a></div>
+	<div ng-model="CharObject[Intelligence]">Intelligence: {{ CharObject.Intelligence }}  <a class="waves-effect waves-green btn-flat" ng-if="(CharObject.Intelligence != null)" ng-click="statRoll('Intelligence')">roll</a></div>
+	<div ng-model="CharObject[Wisdom]">Wisdom: {{ CharObject.Wisdom }}  <a class="waves-effect waves-green btn-flat" ng-if="(CharObject.Wisdom != null)" ng-click="statRoll('Wisdom')">roll</a></div>
+	<div ng-model="CharObject[Charisma]">Charisma: {{ CharObject.Charisma }}  <a class="waves-effect waves-green btn-flat" ng-if="(CharObject.Charisma != null)" ng-click="statRoll('Charisma')">roll</a></div>
+	<div><a class="waves-effect waves-light btn" ng-click="rollAll()">Roll for Scores</a><a class="waves-effect waves-light btn" ng-click="applyBonus()">Apply Racial Bonuses</a></div>
+</div>
 
 
 <!-- Skills -->
-<div id="skillsBox"><h4>Skills</h4><h5>Choose 2:</h5><h5>Bards can choose up to 3:</h5><h5>Rogues can choose up to 4:</h5>
-  <label>Acrobatics:
-    <input type="checkbox" id="acrobaticsSkill" ng-model="skillsCheckBox.Acrobatics" ng-click="skillsLimit()" disabled>
-  </label><br/>
-  <label>Animal Handling:
-    <input type="checkbox" id="animalhandlingSkill" ng-model="skillsCheckBox.AnimalHandling" ng-click="skillsLimit()" disabled>
-  </label><br/>
-  <label>Arcana:
-    <input type="checkbox" id="arcanaSkill" ng-model="skillsCheckBox.Arcana" ng-click="skillsLimit()" disabled>
-  </label><br/>
-	<label>Athletics:
-    <input type="checkbox" id="athleticsSkill" ng-model="skillsCheckBox.Athletics" ng-click="skillsLimit()" disabled>
-  </label><br/>
-  <label>Deception:
-    <input type="checkbox" id="deceptionSkill" ng-model="skillsCheckBox.Deception" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>History:
-    <input type="checkbox" id="historySkill" ng-model="skillsCheckBox.History" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Insight:
-    <input type="checkbox" id="insightSkill" ng-model="skillsCheckBox.Insight" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Intimidation:
-    <input type="checkbox" id="intimidationSkill" ng-model="skillsCheckBox.Intimidation" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Investigation:
-    <input type="checkbox" id="investigationSkill" ng-model="skillsCheckBox.Investigation" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Medicine:
+<form action="#">
+<div id="skillsBox col s6">
+	<div class="col s3">
+	 
+	    <input type="checkbox" id="acrobaticsSkill" ng-model="skillsCheckBox.Acrobatics" ng-click="skillsLimit()" disabled>
+	    <label for="acrobaticsSkill">Acrobatics</label><br/>
+
+	    <input type="checkbox" id="animalhandlingSkill" ng-model="skillsCheckBox.AnimalHandling" ng-click="skillsLimit()" disabled>
+	    <label for="animalhandlingSkill">Animal Handling</label><br/>
+	  
+	    <input type="checkbox" id="arcanaSkill" ng-model="skillsCheckBox.Arcana" ng-click="skillsLimit()" disabled>
+	    <label for="arcanaSkill">Arcana</label><br/>
+
+		
+	    <input type="checkbox" id="athleticsSkill" ng-model="skillsCheckBox.Athletics" ng-click="skillsLimit()" disabled>
+	    <label for="athleticsSkill">Athletics</label><br/>
+	  
+	    <input type="checkbox" id="deceptionSkill" ng-model="skillsCheckBox.Deception" ng-click="skillsLimit()" disabled>
+	    <label for="deceptionSkill">Deception</label><br/>
+	    
+	    <input type="checkbox" id="historySkill" ng-model="skillsCheckBox.History" ng-click="skillsLimit()" disabled>
+	    <label for="historySkill">History</label><br/>
+	    
+	    <input type="checkbox" id="insightSkill" ng-model="skillsCheckBox.Insight" ng-click="skillsLimit()" disabled>
+	    <label for="insightSkill">Insight</label><br/>
+	    
+	    <input type="checkbox" id="intimidationSkill" ng-model="skillsCheckBox.Intimidation" ng-click="skillsLimit()" disabled>
+	    <label for="intimidationSkill">Intimidation</label><br/>
+	    
+	    <input type="checkbox" id="investigationSkill" ng-model="skillsCheckBox.Investigation" ng-click="skillsLimit()" disabled>
+	    <label for="investigationSkill">Investigation</label>
+</div>
+<div class="col s3">
+    
     <input type="checkbox" id="medicineSkill" ng-model="skillsCheckBox.Medicine" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Nature:
+    <label for="medicineSkill">Medicine</label><br/>
+    
     <input type="checkbox" id="natureSkill" ng-model="skillsCheckBox.Nature" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Perception:
+    <label for="natureSkill">Nature</label><br/>
+    
     <input type="checkbox" id="perceptionSkill" ng-model="skillsCheckBox.Perception" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Performance:
+    <label for="perceptionSkill">Perception</label><br/>
+    
     <input type="checkbox" id="performanceSkill" ng-model="skillsCheckBox.Performance" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Persuasion:
+    <label for="performanceSkill">Performance</label><br/>
+    
     <input type="checkbox" id="persuasionSkill" ng-model="skillsCheckBox.Persuasion" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Religion:
+    <label for="persuasionSkill">Persuasion</label><br/>
+    
     <input type="checkbox" id="religionSkill" ng-model="skillsCheckBox.Religion" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Sleight of Hand:
+    <label for="religionSkill">Religion</label><br/>
+    
     <input type="checkbox" id="sleightofhandSkill" ng-model="skillsCheckBox.SleightOfHand" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Stealth:
+    <label for="sleightofhandSkill">Sleight of Hand</label><br/>
+    
     <input type="checkbox" id="stealthSkill" ng-model="skillsCheckBox.Stealth" ng-click="skillsLimit()" disabled>
-  </label><br/>
-    <label>Survival:
+    <label for="stealthSkill">Stealth</label><br/>
+    
     <input type="checkbox" id="survivalSkill" ng-model="skillsCheckBox.Survival" ng-click="skillsLimit()" disabled>
-  </label><br/>
+    <label for="survivalSkill">Survival</label><br/>
+</div>
+</div>
+</form>
+
+
+<div ng-if="(CharObject.Charisma != null)"><a class="waves-effect waves-green btn-large" ng-click="saveChar()">SAVE</a></div>
+
+
+
+
+
+
+
+
+
+
+
 
 </div>
-<div ng-if="(CharObject.Charisma != null)"><button ng-click="saveChar()">
-SAVE</button></div>
-
-
-
-
-
-
-
-
-
-
-
-

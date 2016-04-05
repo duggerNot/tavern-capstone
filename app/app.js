@@ -1,6 +1,6 @@
 "use strict";
 
-let TavernApp = angular.module("tavern-app", ["ngRoute", "firebase"])
+let TavernApp = angular.module("tavern-app", ["ngRoute", "firebase", "ui.materialize"])
   .constant('firebaseAuthURL', "https://tavernapp.firebaseio.com/");
 
 /*
@@ -38,6 +38,11 @@ TavernApp.config(["$routeProvider",
       	templateUrl: "partials/ListView.html",
       	controller: "ListViewCtrl",
       	resolve: { isAuth }
+      }).
+      when("/CharList/:charID", {
+        templateUrl: "partials/charDetailView.html",
+        controller: "CharDetailCtrl",
+        resolve: { isAuth }
       }).
       otherwise({
         redirectTo: "/main"
