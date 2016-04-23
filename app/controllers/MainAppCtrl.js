@@ -22,6 +22,27 @@ TavernApp.controller("MainAppCtrl",
   	$scope.selectedSkills = 0;
   	$scope.skillArray = [];
 
+// 	spell lists
+		// cantrips
+		$scope.bardCantrips = ["Blade Ward", "Dancing Lights", "Friends", "Light", "Mage Hand", "Mending", "Message", "Minor Illusion", "Prestidigitation", "Thunderclap", "True Strike", "Vicious Mockery"];
+		$scope.clericCantrips = ["Guidance", "Light", "Mending", "Resistance", "Sacred Flame", "Spare the Dying", "Thaumaturgy"];
+		$scope.druidCantrips = ["Control Flames", "Create Bonfire", "Druidcraft", "Frostbite", "Guidance", "Gust", "Magic Stone", "Mending", "Mold Earth", "Poison Spray", "Produce Flame", "Resistance", "Shape Water", "Shillelagh", "Thorn Whip", "Thnuderclap"];
+		$scope.paladinCantrips = ["Paladin Have No Cantrips"];
+		$scope.rangerCantrips = ["Rangers Have No Cantrips"];
+		$scope.sorcererCantrips = ["Acid Splash", "Blade Ward", "Booming Blade", "Chill Touch", "Control Flames", "Create Bonfire", "Dancing Lights", "Fire Bolt", "Friends", "Frostbite", "Green-Flame Blade", "Gust", "Light", "Lightning Lure", "Mage Hand", "Mending", "Message", "Minor Illusion", "Mold Earth", "Poison Spray", "Prestidigitation", "Ray of Frost", "Shape Water", "Shocking Grasp", "Sword Burst", "Thunderclap", "True Strike"];
+		$scope.warlockCantrips = ["Blade Ward", "Booming Blade", "Chill Touch", "Create Bonfire", "Eldritch Blast", "Friends", "Frostbite", "Green-Flame Blade", "Lightning Lure", "Mage Hand", "Magic Stone", "Minor Illusion", "Poison Spray", "Prestidigitation", "Sword Burst", "Thunderclap", "True Strike"];
+		$scope.wizardCantrips = ["Acid Splash", "Blade Ward", "Booming Blade", "Chill Touch", "Control Flames", "Create Bonfire", "Dancing Lights", "Fire Bolt", "Friends", "Frostbite", "Green-Flame Blade", "Gust", "Light", "Lightning Lure", "Mage Hand", "Mending", "Message", "Minor Illusion", "Mold Earth", "Poison Spray", "Prestidigitation", "Ray of Frost", "Shape Water", "Shocking Grasp", "Sword Burst", "Thunderclap", "True Strike"];
+		// first level
+		$scope.bardFirstLevel = ["Animal Friendship", "Bane", "Charm Person", "Comprehend Languages", "Cure Wounds", "Detect Magic", "Disguise Self", "Dissonant Whispers", "Earth Tremor", "Faerie Fire", "Feather Fall", "Healing Word", "Heroism", "Identify", "Illusory Script", "Longstrider", "Silent Image", "Sleep", "Speak with Animals", "Tasha's Hideous Laughter", "Thunderwave", "Unseen Servant"];
+		$scope.clericFirstLevel = ["Bane", "Bless", "Command", "Create or Destroy Water", "Cure Wounds", "Detect Evil and Good", "Detect Magic", "Detect Poison and Disease", "Guiding Bolt", "Healing Word", "Inflict Wounds", "Protection from Evil and Good", "Purify Food and Drink", "Sanctuary", "Shield of Faith"];
+		$scope.druidFirstLevel = ["Absorb Elements", "Animal Friendship", "Beast Bond", "Charm Person", "Create or Destroy Water", "Cure Wounds", "Detect Magic", "Detect Poison and Disease", "Earth Tremor", "Entangle", "Faerie Fire", "Fog Cloud", "Goodberry", "Healing Word", "Ice Knife", "Jump", "Longstrider", "Purify Food and Drink", "Speak with Animals", "Thunderwave"];
+		$scope.paladinFirstLevel = ["Bless", "Command", "Compelled Duel", "Cure Wounds", "Detect Good and Evil", "Detect Magic", "Detect Poison and Disease", "Divine Favor", "Heroism", "Protection from Evil and Good", "Purify Food and Drink", "Searing Smite", "Shield of Faith", "Thunderous Smite", "Wratheful Smite"];
+		$scope.rangerFirstLevel = ["Absorb Elements", "Alarm", "Animal Friendship", "Beast Bond", "Cure Wounds", "Detect Magic", "Detect Poison and Disease", "Ensnaring Strike", "Fog Cloud", "Goodberry", "Hail of Thorns", "Hunter's Mark", "Jump", "Longstrider", "Speak with Animals"];
+		$scope.sorcererFirstLevel = ["Burning Hands", "Catapult", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Earth Tremor", "Expeditious Retreat", "False Life", "Feather Fall", "Fog Cloud", "Ice Knife", "Jump", "Mage Armor", "Magic Missile", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Thunderwave", "Witch Bolt"];
+		$scope.warlockFirstLevel = ["Armor of Agathys", "Arms of Hadar", "Charm Person", "Comprehend Languages", "Expeditious Retreat", "Hellish Rebuke", "Hex", "Illusory Script", "Protection from Evil and Good", "Unseen Servant", "Witch Bolt"];
+		$scope.wizardFirstLevel = ["Absorb Elements", "Alarm", "Burning Hands", "Catapult", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Earth Tremor", "Expeditius Retreat", "False Life", "Feather Fall", "Find Familiar", "Fog Cloud", "Grease", "Ice Knife", "Identify", "Illusory Script", "Jump", "Longstrider", "Mage Armor", "Magic Missile", "Protection from Evil and Good", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Tasha's Hideous Laughter", "Tenser's Flaoting Disk", "Thunderwave", "Unseen Servant", "Witch Bolt"];
+
+
 // // this function rolls 4d6 and drops the lowest value and then adds the rest for attribute stats
 		$scope.statRoll = function(attr) {
 			

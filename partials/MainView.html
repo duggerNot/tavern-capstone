@@ -10,7 +10,7 @@
 <!-- Race Select -->
 	<div id="charBlock">
 		<div class="input-field col s4">
-	    <select id="raceSelect" ng-model="selectedRace" ng-change="subRaceFilter()" class="browser-default">
+	    <select id="raceSelect" ng-model="selectedRace" ng-change="subRaceFilter()" class="" material-select>
 	      <option value="" disabled selected>Choose a Race</option>
 	      <option value="Human">Human</option>
 				<option value="Dwarf">Dwarf</option>
@@ -37,7 +37,7 @@
 	 <!-- TO-DO: ADD SUPPORT FOR CLASS ARCHETYPES? NOT MVP!! -->
 	 <div class="row">
 	 <div class="input-field col s4">
-	    <select id="classSelect" ng-model="class" ng-change="skillSelect()" class="browser-default">
+	    <select id="classSelect" ng-model="class" ng-change="skillSelect()" class="" material-select>
 	      <option value="" disabled selected>Choose a Class</option>
 	      <option value="Barbarian">Barbarian</option>
 				<option value="Bard">Bard</option>
@@ -57,7 +57,7 @@
 
 	  <!-- Alignment -->
 	<div class="input-field col s4">
-	    <select id="alignmentSelect" ng-model="alignment" class="browser-default">
+	    <select id="alignmentSelect" ng-model="alignment" class="" material-select>
 	      <option value="" disabled selected>Pick your Alignment</option>
 	      <option value="Lawful Good">Lawful Good</option>
 				<option value="Lawful Neutral">Lawful Neutral</option>
@@ -74,7 +74,7 @@
 
 	<!-- Background -->
 	<div class="input-field col s4">
-		<select id="backgrounds" ng-model="background" ng-change="backgroundSkills()" class="browser-default">
+		<select id="backgrounds" ng-model="background" ng-change="backgroundSkills()" class="" material-select>
 			<option value="" disabled selected>Pick Your Background</option>
 			<option value="Acolyte">Acolyte</option>
 			<option value="Charlatan">Charlatan</option>
@@ -180,23 +180,122 @@
 </form>
 
 
-<div class="row">
+<div class="row" ng-show="class == 'Bard'">
 	<div class="input-field col l6">
 		<select class=""material-select multiple watch>
 			<option value="" disabled selected="">Cantrips</option>
-	    <option value="">1</option>
-	    <option value="">2</option>
-	    <option value="">3</option>
-	    <option value="">4</option>
+			<option value="" ng-repeat="spell in bardCantrips">{{spell}}</option>
 		</select>
 	</div>
 	<div class="input-field col l6">
 		<select class=""material-select multiple watch>
 			<option value="" disabled selected="">First Level Spells</option>
-	    <option value="">1</option>
-	    <option value="">2</option>
-	    <option value="">3</option>
-	    <option value="">4</option>
+			<option value="" ng-repeat="Spell in bardFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Cleric'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in clericCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in clericFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Druid'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in druidCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in druidFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Paladin'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in paladinCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in paladinFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Ranger'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in rangerCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in rangerFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Sorcerer'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in sorcererCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in sorcererFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Warlock'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in warlockCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in warlockFirstLevel">{{Spell}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row" ng-show="class == 'Wizard'">
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">Cantrips</option>
+			<option value="" ng-repeat="spell in wizardCantrips">{{spell}}</option>
+		</select>
+	</div>
+	<div class="input-field col l6">
+		<select class=""material-select multiple watch>
+			<option value="" disabled selected="">First Level Spells</option>
+			<option value="" ng-repeat="Spell in wizardFirstLevel">{{Spell}}</option>
 		</select>
 	</div>
 </div>
