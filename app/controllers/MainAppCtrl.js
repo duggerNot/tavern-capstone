@@ -10,7 +10,7 @@ TavernApp.controller("MainAppCtrl",
 
 
   function($scope, $http, authFactory, firebaseAuthURL, $location) {
- 
+
 		$scope.dwarfSubRaces = ["Hill Dwarf", "Mountain Dwarf"];
 		$scope.elfSubRaces = ["High Elf", "Wood Elf", "Dark Elf"];
 		$scope.halflingSubRaces = ["Lightfoot", "Stout"];
@@ -21,6 +21,7 @@ TavernApp.controller("MainAppCtrl",
   	$scope.applied = false;
   	$scope.selectedSkills = 0;
   	$scope.skillArray = [];
+  	$scope.spellList = [];
 
 // 	spell lists
 		// cantrips
@@ -40,14 +41,14 @@ TavernApp.controller("MainAppCtrl",
 		$scope.rangerFirstLevel = ["Absorb Elements", "Alarm", "Animal Friendship", "Beast Bond", "Cure Wounds", "Detect Magic", "Detect Poison and Disease", "Ensnaring Strike", "Fog Cloud", "Goodberry", "Hail of Thorns", "Hunter's Mark", "Jump", "Longstrider", "Speak with Animals"];
 		$scope.sorcererFirstLevel = ["Burning Hands", "Catapult", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Earth Tremor", "Expeditious Retreat", "False Life", "Feather Fall", "Fog Cloud", "Ice Knife", "Jump", "Mage Armor", "Magic Missile", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Thunderwave", "Witch Bolt"];
 		$scope.warlockFirstLevel = ["Armor of Agathys", "Arms of Hadar", "Charm Person", "Comprehend Languages", "Expeditious Retreat", "Hellish Rebuke", "Hex", "Illusory Script", "Protection from Evil and Good", "Unseen Servant", "Witch Bolt"];
-		$scope.wizardFirstLevel = ["Absorb Elements", "Alarm", "Burning Hands", "Catapult", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Earth Tremor", "Expeditius Retreat", "False Life", "Feather Fall", "Find Familiar", "Fog Cloud", "Grease", "Ice Knife", "Identify", "Illusory Script", "Jump", "Longstrider", "Mage Armor", "Magic Missile", "Protection from Evil and Good", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Tasha's Hideous Laughter", "Tenser's Flaoting Disk", "Thunderwave", "Unseen Servant", "Witch Bolt"];
+		$scope.wizardFirstLevel = ["Absorb Elements", "Alarm", "Burning Hands", "Catapult", "Charm Person", "Chromatic Orb", "Color Spray", "Comprehend Languages", "Detect Magic", "Disguise Self", "Earth Tremor", "Expeditius Retreat", "False Life", "Feather Fall", "Find Familiar", "Fog Cloud", "Grease", "Ice Knife", "Identify", "Illusory Script", "Jump", "Longstrider", "Mage Armor", "Magic Missile", "Protection from Evil and Good", "Ray of Sickness", "Shield", "Silent Image", "Sleep", "Tasha's Hideous Laughter", "Tenser's Floating Disk", "Thunderwave", "Unseen Servant", "Witch Bolt"];
 
 
 // // this function rolls 4d6 and drops the lowest value and then adds the rest for attribute stats
 		$scope.statRoll = function(attr) {
-			
+
 			let rollArray = [];
-			
+
 			let firstRoll = (Math.floor((Math.random()*6)+1));
 			let secondRoll = (Math.floor((Math.random()*6)+1));
 			let thirdRoll = (Math.floor((Math.random()*6)+1));
@@ -61,12 +62,12 @@ TavernApp.controller("MainAppCtrl",
 			rollArray.sort(function(a, b) {
   			return a - b;
 			});
-			
+
 			rollArray.shift();
 			let finalRoll = rollArray.reduce(function(a, b) {
  				 return a + b;
 			});
-			
+
 
 			$scope.CharObject[attr] = finalRoll;
 		}
@@ -121,7 +122,7 @@ TavernApp.controller("MainAppCtrl",
 						break;
 					default:
 						console.log("No Race selected, No bonus applied");
-						break;		
+						break;
 				}
 				switch ($scope.subRace) {
 					case "Hill Dwarf":
@@ -209,7 +210,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 				case (ability === 30):
 					return 10;
-					break;	
+					break;
 			}
 		}
 
@@ -362,7 +363,7 @@ TavernApp.controller("MainAppCtrl",
 			angular.element(religionSkill)[0].setAttribute("disabled", "disabled");
 			angular.element(sleightofhandSkill)[0].setAttribute("disabled", "disabled");
 			angular.element(stealthSkill)[0].setAttribute("disabled", "disabled");
-			angular.element(survivalSkill)[0].setAttribute("disabled", "disabled");	
+			angular.element(survivalSkill)[0].setAttribute("disabled", "disabled");
 		}
 
 // helper function to uncheck the skills
@@ -723,7 +724,7 @@ TavernApp.controller("MainAppCtrl",
 					break;
 			}
 		}
-		
+
 
 		$scope.saveChar = function() {
 
@@ -758,8 +759,8 @@ TavernApp.controller("MainAppCtrl",
         "https://tavernapp.firebaseio.com/characters.json",
         JSON.stringify($scope.CharObject)
       ).then(
-        () => $location.url("/CharList"),      
-        (response) => console.log(response)  
+        () => $location.url("/CharList"),
+        (response) => console.log(response)
       );
 		}
 
