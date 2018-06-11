@@ -20,7 +20,7 @@ let isAuth = (authFactory) => new Promise((resolve, reject) => {
 
 TavernApp.config(["$routeProvider",
   function ($routeProvider) {
-    $routeProvider.  
+    $routeProvider.
       when("/login", {
         templateUrl: "partials/Login.html",
         controller: "LoginCtrl"
@@ -67,8 +67,3 @@ TavernApp.run([
     });
   }
 ]);
-
-
-
-
-
